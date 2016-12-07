@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<Pane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <children>
+    <AnchorPane layoutX="180.0" layoutY="136.0" prefHeight="328.0" prefWidth="440.0">
+      <children>
+        <Button layoutX="148.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="145.0" text="Играть" AnchorPane.topAnchor="76.0" />
+        <Button layoutX="148.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="145.0" text="Правила" AnchorPane.topAnchor="142.0" />
+        <Button layoutX="170.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Выход" AnchorPane.topAnchor="227.0" />
+      </children>
+    </AnchorPane>
+  </children>
+</Pane>
