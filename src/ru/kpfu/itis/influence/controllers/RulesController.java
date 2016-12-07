@@ -13,18 +13,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainMenuController implements Initializable {
+/**
+ * Created by cmen on 07/12/16.
+ */
+public class RulesController implements Initializable {
 
     @FXML
-    private Button btnMainMenuRules;
+    private Button btnRulesBack;
 
-    public void exitGame(ActionEvent actionEvent) {
-        System.exit(0);
-    }
-
-    public void goToRules(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) btnMainMenuRules.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/rules.fxml"));
+    public void goToMainMenu(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) btnRulesBack.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/main_menu.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
