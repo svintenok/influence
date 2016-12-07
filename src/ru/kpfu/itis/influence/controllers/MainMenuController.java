@@ -18,8 +18,22 @@ public class MainMenuController implements Initializable {
     @FXML
     private Button btnMainMenuRules;
 
+    @FXML
+    private Button btnMainMenuPlayGame;
+
+    @FXML
+    private Button btnMainMenuExit;
+
     public void exitGame(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    public void goToGame(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) btnMainMenuPlayGame.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/game.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void goToRules(ActionEvent actionEvent) throws IOException {

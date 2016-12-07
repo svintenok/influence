@@ -5,4 +5,6 @@ package ru.kpfu.itis.influence.models;
  */
 public class Site {
 
+
+
 }
