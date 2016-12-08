@@ -14,8 +14,8 @@
       </content>
     </ScrollPane>
     <Button layoutX="200.0" layoutY="506.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
-    <Button fx:id="btnSurrender" layoutX="681.0" layoutY="14.0" mnemonicParsing="false" onAction="#surrender" prefHeight="36.0" prefWidth="106.0" text="Сдаться" />
-    <Button fx:id="btnTestWin" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#winNotification" prefHeight="36.0" prefWidth="150.0" text="Тест &quot;Победа&quot;" />
-    <Button id="bntTestLose" fx:id="btnTestLose" layoutX="350.0" layoutY="14.0" mnemonicParsing="false" onAction="#loseNotification" prefHeight="36.0" prefWidth="150.0" text="Тест &quot;Поражение&quot;" />
+    <Button fx:id="btnSurrender" layoutX="681.0" layoutY="14.0" mnemonicParsing="false" onAction="#notification" prefHeight="36.0" prefWidth="106.0" text="Сдаться" />
+    <Button fx:id="btnTestWin" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#notification" prefHeight="36.0" prefWidth="150.0" text="Тест &quot;Победа&quot;" />
+    <Button id="bntTestLose" fx:id="btnTestLose" layoutX="350.0" layoutY="14.0" mnemonicParsing="false" onAction="#notification" prefHeight="36.0" prefWidth="150.0" text="Тест &quot;Поражение&quot;" />
   </children>
 </AnchorPane>
