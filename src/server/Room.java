@@ -1,3 +1,5 @@
+package server;
+
 import java.io.IOException;
 import java.net.Socket;
 
@@ -18,6 +20,7 @@ public class Room implements Runnable{
         this.player2 = new Player(socket2);
         this.thread = new Thread(this);
         this.thread.start();
+        generateGameMap();
     }
 
     @Override
@@ -54,5 +57,10 @@ public class Room implements Runnable{
             e.printStackTrace();
         }
         return true;
+    }
+
+    private void generateGameMap(){
+        GraphGenerator graphGenerator = new GraphGenerator();
+        graphGenerator.generate();
     }
 }
