@@ -21,20 +21,25 @@ import java.util.ResourceBundle;
  */
 public class GameController implements Initializable {
 
+    // Buttons from game screen
     @FXML
     private Button btnSurrender;
-
     @FXML
     private Button btnTestWin;
-
     @FXML
     private Button btnTestLose;
 
+    // Buttons from Win/Lose pop-up windows
     @FXML
     private Button btnWinNotificationOk;
-
     @FXML
     private Button btnLoseNotificationOk;
+
+    // Buttons from Surrender pop-up window
+    @FXML
+    private Button btnSurrenderNo;
+    @FXML
+    private Button btnSurrenderYes;
 
 
     // Next three methods look like the same method with different parameter in getResource() and setTitle() methods
@@ -99,6 +104,11 @@ public class GameController implements Initializable {
     public void loseEvent(ActionEvent actionEvent) {
         Stage modalStage = (Stage) btnLoseNotificationOk.getScene().getWindow();
         modalStage.close();
+    }
+
+    public void surrenderRefuse(ActionEvent actionEvent) {
+        Stage stage = (Stage) btnSurrenderNo.getScene().getWindow();
+        stage.close();
     }
 
     @Override
