@@ -14,7 +14,7 @@
         <Font size="15.0" />
       </font>
     </Label>
-    <Button layoutX="50.0" layoutY="98.0" mnemonicParsing="false" fx:id="btnYes" prefHeight="25.0" prefWidth="80.0" text="Да :(" />
-    <Button layoutX="165.0" layoutY="98.0" mnemonicParsing="false" fx:id="btnNo" onAction="#refuse" prefHeight="25.0" prefWidth="80.0" text="Нет! :\" />
+    <Button fx:id="btnYes" layoutX="40.0" layoutY="80.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Да :(" />
+    <Button fx:id="btnNo" layoutX="165.0" layoutY="80.0" mnemonicParsing="false" onAction="#refuse" prefHeight="40.0" prefWidth="100.0" text="Нет! :\" />
   </children>
 </AnchorPane>
