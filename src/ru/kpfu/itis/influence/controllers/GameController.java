@@ -33,7 +33,7 @@ public class GameController implements Initializable {
     private static final String WIN_TITLE = "Win";
     private static final String LOSE_TITLE = "Lose";
     private static final String SURRENDER_TITLE = "Surrender";
-    private String title;
+    private static String title;
 
     // Buttons from game screen
     @FXML
