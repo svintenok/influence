@@ -8,12 +8,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import ru.kpfu.itis.influence.models.Cell;
+import ru.kpfu.itis.influence.models.GameField;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 /**
@@ -23,6 +29,7 @@ public class GameController implements Initializable {
 
     // FXMLResources
 
+    private static final String SITE_FXML = "../fxml/cell.fxml";
     private static final String WIN_FXML = "../fxml/win.fxml";
     private static final String LOSE_FXML = "../fxml/lose.fxml";
     private static final String SURRENDER_FXML = "../fxml/surrender.fxml";
@@ -55,17 +62,44 @@ public class GameController implements Initializable {
     @FXML
     private Button btnSurrenderYes;
 
+    // Game field
+
+    private GameField gameField;
+
+    @FXML
+    private AnchorPane paneGameField;
+
+    private static LinkedList<Cell> cells = new LinkedList<>();
+
+    private static double x;
+    private static double y;
+    private static double shiftX = 0;
+    private static double shiftY = 0;
+
+    public void addCell() {
+
+        gameField = new GameField(9, 14, paneGameField);
+
+        /*
+            Cell cell = new Cell();
+            cell.setColor(Color.BLUE);
+            cell.setValue(12);
+            cells.add(cell);
+            paneGameField.getChildren().add(cells.getLast().getPaneForm());
+        */
+    }
+
     public void notification(ActionEvent actionEvent) {
 
         if (actionEvent.getSource().equals(btnSurrender)) {
             resource = SURRENDER_FXML;
             title = SURRENDER_TITLE;
         }
-        if (actionEvent.getSource().equals(btnTestLose)) {
+        else if (actionEvent.getSource().equals(btnTestLose)) {
             resource = LOSE_FXML;
             title = LOSE_TITLE;
         }
-        if (actionEvent.getSource().equals(btnTestWin)) {
+        else if (actionEvent.getSource().equals(btnTestWin)) {
             resource = WIN_FXML;
             title = LOSE_TITLE;
         }

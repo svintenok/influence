@@ -40,10 +40,10 @@ public class MainMenuController implements Initializable {
         if (actionEvent.getSource().equals(btnMainMenuExit)) {
             System.exit(0);
         }
-        if (actionEvent.getSource().equals(btnMainMenuPlayGame)) {
+        else if (actionEvent.getSource().equals(btnMainMenuPlayGame)) {
             resource = GAME_FXML;
         }
-        if (actionEvent.getSource().equals(btnMainMenuRules)) {
+        else if (actionEvent.getSource().equals(btnMainMenuRules)) {
             resource = RULES_FXML;
         }
 
