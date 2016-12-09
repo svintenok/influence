@@ -30,6 +30,8 @@ public class Cell {
     public Cell() {
         try {
             cell = FXMLLoader.load(getClass().getResource(CELL_FXML));
+            //cell.getChildren().get(0).setScaleX(0.8);
+            //cell.getChildren().get(0).setScaleY(0.8);
 
             cell.getChildren().get(2).setOnMouseClicked(mouseEvent -> {
                 Label label = (Label) cell.getChildren().get(2);
