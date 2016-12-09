@@ -8,13 +8,22 @@ import javafx.scene.shape.Polygon;
  */
 public class BigCell extends Cell{
 
+    private static final int MAX_VALUE = 12;
+
     public BigCell() {
         super();
         this.getPaneForm().getChildren().get(0).setScaleX(1.1);
         this.getPaneForm().getChildren().get(0).setScaleY(1.1);
         Polygon outerStroke = (Polygon) this.getPaneForm().getChildren().get(1);
         outerStroke.setStrokeWidth(3);
-        Label value = (Label) this.getPaneForm().getChildren().get(2);
-        value.setText("12");
+
+        this.getPaneForm().getChildren().get(2).setOnMouseClicked(mouseEvent -> {
+            Label label = (Label) this.getPaneForm().getChildren().get(2);
+            int value = Integer.parseInt(label.getText());
+            if (value < MAX_VALUE) {
+                label.setText(String.valueOf(++value));
+            }
+        });
+
     }
 }

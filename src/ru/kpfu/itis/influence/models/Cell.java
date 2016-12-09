@@ -16,8 +16,9 @@ import java.io.IOException;
  */
 public class Cell {
 
-    private static final Double PADDING_X = 51.0;
-    private static final Double PADDING_Y = 61.0;
+    private static final int MAX_VALUE = 8;
+    private static final double PADDING_X = 51.0;
+    private static final double PADDING_Y = 61.0;
 
 
     private static final String CELL_FXML = "../fxml/cell.fxml";
@@ -29,6 +30,15 @@ public class Cell {
     public Cell() {
         try {
             cell = FXMLLoader.load(getClass().getResource(CELL_FXML));
+
+            cell.getChildren().get(2).setOnMouseClicked(mouseEvent -> {
+                Label label = (Label) cell.getChildren().get(2);
+                int value = Integer.parseInt(label.getText());
+                if (value < MAX_VALUE) {
+                    label.setText(String.valueOf(++value));
+                }
+            });
+
         } catch (IOException e) {
             e.printStackTrace();
         }
