@@ -4,6 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import javafx.scene.shape.Polygon;
 
 import java.util.LinkedList;
@@ -16,6 +20,7 @@ import java.util.List;
 public class GameField {
 
     private List<Cell> cellsList;
+    private List<Edge> edgesList;
 
     //ObservableList<Cell> map;
 
@@ -44,9 +49,42 @@ public class GameField {
             pane.getChildren().add(cell.getPaneForm());
         }
 
+        // The next code is just a hardcode testing
+
+        cellsList.get(1).setColor(Color.RED);
+
+        Edge edge = new Edge();
+        edge.setCells(
+                cellsList.get(1),
+                cellsList.get(2)
+        );
+        pane.getChildren().add(edge.getLineForm());
+        edge.getLineForm().toBack();
+
+        Polygon innerPolygon_1 = (Polygon) cellsList.get(1).getPaneForm().getChildren().get(0);
+        Color color1 = (Color) innerPolygon_1.getFill();
+        Polygon innerPolygon_2 = (Polygon) cellsList.get(2).getPaneForm().getChildren().get(0);
+        Color color2 = (Color) innerPolygon_2.getFill();
+
+        System.out.println(edge.getStartX());
+        System.out.println(edge.getStartY());
+        System.out.println(edge.getEndX());
+        System.out.println(edge.getEndY());
+
+        LinearGradient edgeColor = new LinearGradient(
+                edge.getStartX(),
+                edge.getStartY(),
+                edge.getEndX(),
+                edge.getEndY(),
+                false,
+                CycleMethod.NO_CYCLE,
+                new Stop(0, color1),
+                new Stop(1, color2)
+        );
+        edge.getLineForm().setStroke(edgeColor);
     }
 
-    public static List<Cell> generateFullMap(int rows, int columns) {
+    private static List<Cell> generateFullMap(int rows, int columns) {
 
         int column_counter = 0;
         int row_parity = 0;
@@ -77,14 +115,6 @@ public class GameField {
         }
 
         return cells;
-    }
-
-    public void addEdge(Cell fromCell, Cell toCell, Pane pane) {
-
-    }
-
-    public void addCell(int number, boolean size, Pane pane) {
-
     }
 
 }

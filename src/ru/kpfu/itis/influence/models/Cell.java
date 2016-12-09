@@ -1,6 +1,7 @@
 package ru.kpfu.itis.influence.models;
 
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -14,6 +15,10 @@ import java.io.IOException;
  * Created by cmen on 08/12/16.
  */
 public class Cell {
+
+    private static final Double PADDING_X = 51.0;
+    private static final Double PADDING_Y = 61.0;
+
 
     private static final String CELL_FXML = "../fxml/cell.fxml";
     private Pane cell;
@@ -46,11 +51,15 @@ public class Cell {
     }
 
     public double getCenterX() {
-        return cell.getLayoutX() + cell.getWidth() / 2;
+        Bounds boundsInScene = cell.localToScene(cell.getBoundsInLocal());
+        System.out.println("MinX: " + boundsInScene.getMinX());
+        return boundsInScene.getMinX() + boundsInScene.getWidth() / 2 - PADDING_X;
     }
 
     public double getCenterY () {
-        return cell.getLayoutY() + cell.getHeight() / 2;
+        Bounds boundsInScene = cell.localToScene(cell.getBoundsInLocal());
+        System.out.println("MinY: " + boundsInScene.getMinY());
+        return boundsInScene.getMinY() + boundsInScene.getHeight() / 2 - PADDING_Y;
     }
 
 
