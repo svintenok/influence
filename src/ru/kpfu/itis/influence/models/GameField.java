@@ -15,7 +15,7 @@ import java.util.List;
 
 public class GameField {
 
-    List<Cell> cellsList;
+    private List<Cell> cellsList;
 
     //ObservableList<Cell> map;
 
@@ -30,23 +30,28 @@ public class GameField {
 
     public GameField(int rows, int columns, Pane pane) {
 
+        this(rows, columns, pane, generateFullMap(rows, columns));
+
+    }
+
+    public GameField(int rows, int columns, Pane pane, List<Cell> cellsList) {
+
         pane.setPrefSize(SHIFT_X * columns, SHIFT_Y * rows);
         System.out.println(SHIFT_X * columns);
         System.out.println(SHIFT_Y * rows);
 
-        generateFullMap(rows, columns);
-
         for (Cell cell: cellsList) {
             pane.getChildren().add(cell.getPaneForm());
         }
+
     }
 
-    public List<Cell> generateFullMap(int rows, int columns) {
+    public static List<Cell> generateFullMap(int rows, int columns) {
 
         int column_counter = 0;
         int row_parity = 0;
 
-        cellsList = new LinkedList<>();
+        List<Cell> cells = new LinkedList<>();
         int cellsNumber = rows * columns - rows / 2;
         for (int i = 0; i < cellsNumber; i++) {
             Cell cell;
@@ -57,7 +62,7 @@ public class GameField {
             }
             cell.getPaneForm().setLayoutX(x);
             cell.getPaneForm().setLayoutY(y);
-            cellsList.add(cell);
+            cells.add(cell);
 
             column_counter += 1;
             if (column_counter + row_parity == columns) {
@@ -71,7 +76,7 @@ public class GameField {
 
         }
 
-        return cellsList;
+        return cells;
     }
 
     public void addEdge(Cell fromCell, Cell toCell, Pane pane) {
