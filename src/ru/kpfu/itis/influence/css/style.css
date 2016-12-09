@@ -3,34 +3,63 @@
     src: url('../fonts/hacked.ttf');
 }
 
+@font-face {
+    font-family: Trench;
+    src: url('../fonts/trench.ttf');
+}
+
 #logo {
-    -fx-font-family: 'Hacked';
+    -fx-font-family: 'Trench';
     -fx-font-size: 120px;
     -fx-alignment: center;
-    -fx-text-fill: lightgray;
-    -fx-effect: dropshadow(gaussian, darkcyan, 2, 1.0, 5, 5);
+    -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
 }
 
-#main_menu {
-    -fx-background-image: url("../img/background_tile.jpg");
-    -fx-background-repeat: repeat;
+#main-menu {
+    -fx-background-image: url("../img/background.jpg");
+    -fx-background-repeat: stretch;
 }
 
-#main_menu_button {
+#main-menu-button-blue {
     -fx-background-color:
-            linear-gradient(darkcyan 0%, #232723 25%, #373837 75%, #757575 100%),
-            linear-gradient(#020b02, #3a3a3a),
-            linear-gradient(#b9b9b9 0%, #c2c2c2 20%, #afafaf 80%, #c8c8c8 100%),
-            linear-gradient(lightcyan 0%, #dbdbdb 50%, #cacaca 51%, #d7d7d7 100%);
-    -fx-background-insets: 0,1,4,5;
-    -fx-background-radius: 9,8,5,4;
-    -fx-padding: 15 30 15 30;
-    -fx-font-family: "Hacked";
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.2) , 1, 0.0 , 0 , 1);
+            black;
+    -fx-border-color: linear-gradient(cornflowerblue, #0055D6);
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
+    -fx-font-size: 19px;
 }
-#main_menu_button Text {
-    -fx-effect: dropshadow( one-pass-box , white , 0, 0.0 , 0 , 1 );
+
+#main-menu-button-red {
+    -fx-background-color:
+            black;
+    -fx-border-color: linear-gradient(lightcoral, darkred);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: linear-gradient(lightcoral, darkred);
+    -fx-font-size: 15px;
+}
+
+#main-menu-button-green {
+    -fx-background-color:
+            black;
+    -fx-border-color: linear-gradient(lightgreen, forestgreen);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: linear-gradient(lightgreen, forestgreen);
+    -fx-font-size: 19px;
+}
+
+
+#main-menu-button Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);
 }
