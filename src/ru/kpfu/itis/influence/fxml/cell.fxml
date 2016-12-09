@@ -14,13 +14,13 @@
       <points>
         <Double fx:value="7.5" />
         <Double fx:value="-12.5" />
-        <Double fx:value="14.0" />
+        <Double fx:value="15.0" />
         <Double fx:value="0.0" />
         <Double fx:value="7.5" />
         <Double fx:value="12.5" />
         <Double fx:value="-7.5" />
         <Double fx:value="12.5" />
-        <Double fx:value="-14.0" />
+        <Double fx:value="-15.0" />
         <Double fx:value="0.0" />
         <Double fx:value="-7.5" />
         <Double fx:value="-12.5" />
@@ -42,9 +42,9 @@
         <Double fx:value="-18.75" />
       </points>
     </Polygon>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="4.0" prefHeight="40.0" prefWidth="40.0" text="12" textFill="WHITE">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="4.0" prefHeight="40.0" prefWidth="40.0" text="8" textFill="WHITE">
       <font>
-        <Font size="17.0" />
+        <Font size="20.0" />
       </font>
     </Label>
   </children>

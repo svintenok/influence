@@ -2,7 +2,9 @@ package ru.kpfu.itis.influence.models;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Polygon;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -44,6 +46,15 @@ public class GameField {
             Cell cell = new Cell();
             cell.getPaneForm().setLayoutX(x);
             cell.getPaneForm().setLayoutY(y);
+            if (i == 17) {
+                cell.getPaneForm().getChildren().get(0).setScaleX(1.1);
+                cell.getPaneForm().getChildren().get(0).setScaleY(1.1);
+                Polygon outerPolygon = (Polygon) cell.getPaneForm().getChildren().get(1);
+                outerPolygon.setStrokeWidth(3);
+                Label label = (Label) cell.getPaneForm().getChildren().get(2);
+                label.setText("12");
+                System.out.println("Boom!");
+            }
             //map.add(cell);
             cellsList.add(cell);
             pane.getChildren().add(cell.getPaneForm());
