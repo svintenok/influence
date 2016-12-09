@@ -16,8 +16,8 @@ public class GameField {
 
     //ObservableList<Cell> map;
 
-    private static final double SHIFT_X = 80;
-    private static final double SHIFT_Y = 71;
+    private static final double SHIFT_X = 50;
+    private static final double SHIFT_Y = 44.5;
 
     private static final double START_X = 0;
     private static final double START_Y = 0;
@@ -34,6 +34,8 @@ public class GameField {
         int cellsNumber = rows * columns - rows / 2;
 
         pane.setPrefSize(SHIFT_X * columns, SHIFT_Y * rows);
+        System.out.println(SHIFT_X * columns);
+        System.out.println(SHIFT_Y * rows);
 
         cellsList = new LinkedList<>();
         //map = FXCollections.observableList(cellsList);
@@ -49,7 +51,7 @@ public class GameField {
             if (column_counter + row_parity == columns) {
                 column_counter = 0;
                 y += SHIFT_Y;
-                x = row_parity == 0 ? START_X + 40 : START_X;
+                x = row_parity == 0 ? START_X + SHIFT_X / 2 : START_X;
                 row_parity = (row_parity + 1) % 2;
             } else {
                 x += SHIFT_X;

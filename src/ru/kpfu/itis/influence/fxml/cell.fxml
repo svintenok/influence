@@ -8,43 +8,43 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="80.0" prefWidth="80.0" scaleX="1.0" scaleY="1.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<Pane prefHeight="50.0" prefWidth="50.0" scaleX="1.0" scaleY="1.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <Polygon fill="DARKGREY" layoutX="40.0" layoutY="40.0" scaleX="1.0" scaleY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+    <Polygon fill="DARKGREY" layoutX="25.0" layoutY="25.0" scaleX="1.0" scaleY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
       <points>
-        <Double fx:value="12.0" />
-        <Double fx:value="-20.0" />
-        <Double fx:value="24.0" />
+        <Double fx:value="7.5" />
+        <Double fx:value="-12.5" />
+        <Double fx:value="14.0" />
         <Double fx:value="0.0" />
-        <Double fx:value="12.0" />
-        <Double fx:value="20.0" />
-        <Double fx:value="-12.0" />
-        <Double fx:value="20.0" />
-        <Double fx:value="-24.0" />
+        <Double fx:value="7.5" />
+        <Double fx:value="12.5" />
+        <Double fx:value="-7.5" />
+        <Double fx:value="12.5" />
+        <Double fx:value="-14.0" />
         <Double fx:value="0.0" />
-        <Double fx:value="-12.0" />
-        <Double fx:value="-20.0" />
+        <Double fx:value="-7.5" />
+        <Double fx:value="-12.5" />
       </points>
     </Polygon>
-    <Polygon fill="#1e90ff00" layoutX="40.0" layoutY="40.0" opacity="0.5" scaleX="1.0" scaleY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" translateX="0.0" translateY="0.0">
+    <Polygon fill="#1e90ff00" layoutX="25.0" layoutY="25.0" opacity="0.5" scaleX="1.0" scaleY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" translateX="0.0" translateY="0.0">
       <points>
-        <Double fx:value="18.0" />
-        <Double fx:value="-30.0" />
-        <Double fx:value="36.0" />
+        <Double fx:value="11.25" />
+        <Double fx:value="-18.75" />
+        <Double fx:value="22.5" />
         <Double fx:value="0.0" />
-        <Double fx:value="18.0" />
-        <Double fx:value="30.0" />
-        <Double fx:value="-18.0" />
-        <Double fx:value="30.0" />
-        <Double fx:value="-36.0" />
+        <Double fx:value="11.25" />
+        <Double fx:value="18.75" />
+        <Double fx:value="-11.25" />
+        <Double fx:value="18.75" />
+        <Double fx:value="-22.5" />
         <Double fx:value="0.0" />
-        <Double fx:value="-18.0" />
-        <Double fx:value="-30.0" />
+        <Double fx:value="-11.25" />
+        <Double fx:value="-18.75" />
       </points>
     </Polygon>
-    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="40.0" text="0" textFill="WHITE">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="4.0" prefHeight="40.0" prefWidth="40.0" text="12" textFill="WHITE">
       <font>
-        <Font size="20.0" />
+        <Font size="17.0" />
       </font>
     </Label>
   </children>
