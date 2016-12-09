@@ -36,6 +36,9 @@ public class Cell {
                 int value = Integer.parseInt(label.getText());
                 if (value < MAX_VALUE) {
                     label.setText(String.valueOf(++value));
+                    double scaleX = cell.getChildren().get(0).getScaleX();
+                    cell.getChildren().get(0).setScaleX(scaleX + 0.025);
+                    cell.getChildren().get(0).setScaleY(scaleX + 0.025);
                 }
             });
 
