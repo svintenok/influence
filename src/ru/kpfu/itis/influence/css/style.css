@@ -12,7 +12,7 @@
 }
 
 #main_menu {
-    -fx-background-image: url("../img/background_tile2.jpg");
+    -fx-background-image: url("../img/background_tile.jpg");
     -fx-background-repeat: repeat;
 }
 
