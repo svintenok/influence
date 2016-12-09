@@ -29,7 +29,7 @@ public class GameController implements Initializable {
 
     // FXMLResources
 
-    private static final String SITE_FXML = "../fxml/cell.fxml";
+    private static final String CELL_FXML = "../fxml/cell.fxml";
     private static final String WIN_FXML = "../fxml/win.fxml";
     private static final String LOSE_FXML = "../fxml/lose.fxml";
     private static final String SURRENDER_FXML = "../fxml/surrender.fxml";

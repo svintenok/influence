@@ -45,5 +45,13 @@ public class Cell {
         label.setText(value.toString());
     }
 
+    public double getCenterX() {
+        return cell.getLayoutX() + cell.getWidth() / 2;
+    }
+
+    public double getCenterY () {
+        return cell.getLayoutY() + cell.getHeight() / 2;
+    }
+
 
 }

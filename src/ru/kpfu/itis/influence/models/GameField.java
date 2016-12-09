@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Created by cmen on 08/12/16.
  */
+
 public class GameField {
 
     List<Cell> cellsList;
@@ -26,7 +27,6 @@ public class GameField {
 
     private static double x = 0;
     private static double y = 0;
-
 
     public GameField(int rows, int columns, Pane pane) {
 
@@ -43,9 +43,15 @@ public class GameField {
         //map = FXCollections.observableList(cellsList);
 
         for (int i = 0; i < cellsNumber; i++) {
-            Cell cell = new Cell();
+            Cell cell;
+            if (i == 17) {
+                cell = new BigCell();
+            } else {
+                cell = new Cell();
+            }
             cell.getPaneForm().setLayoutX(x);
             cell.getPaneForm().setLayoutY(y);
+            /*
             if (i == 17) {
                 cell.getPaneForm().getChildren().get(0).setScaleX(1.1);
                 cell.getPaneForm().getChildren().get(0).setScaleY(1.1);
@@ -54,7 +60,7 @@ public class GameField {
                 Label label = (Label) cell.getPaneForm().getChildren().get(2);
                 label.setText("12");
                 System.out.println("Boom!");
-            }
+            }*/
             //map.add(cell);
             cellsList.add(cell);
             pane.getChildren().add(cell.getPaneForm());
@@ -68,6 +74,25 @@ public class GameField {
                 x += SHIFT_X;
             }
         }
+    }
+
+    public List<Cell> generateFullMap(int rows, int columns) {
+        cellsList = new LinkedList<>();
+        int cellsNumber = rows * columns - rows / 2;
+        for (int i = 0; i < cellsNumber; i++) {
+            Cell cell = new Cell();
+
+        }
+
+        return cellsList;
+    }
+
+    public void addEdge(Cell fromCell, Cell toCell, Pane pane) {
+
+    }
+
+    public void addCell(int number, boolean size, Pane pane) {
+
     }
 /*
         int parity;
