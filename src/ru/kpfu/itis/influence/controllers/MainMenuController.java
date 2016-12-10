@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,10 +41,10 @@ public class MainMenuController implements Initializable {
         if (actionEvent.getSource().equals(btnMainMenuExit)) {
             System.exit(0);
         }
-        if (actionEvent.getSource().equals(btnMainMenuPlayGame)) {
+        else if (actionEvent.getSource().equals(btnMainMenuPlayGame)) {
             resource = GAME_FXML;
         }
-        if (actionEvent.getSource().equals(btnMainMenuRules)) {
+        else if (actionEvent.getSource().equals(btnMainMenuRules)) {
             resource = RULES_FXML;
         }
 
@@ -77,6 +78,5 @@ public class MainMenuController implements Initializable {
 */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }

@@ -8,14 +8,15 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.influence.controllers.GameController">
   <children>
-    <ScrollPane layoutX="51.0" layoutY="63.0" prefHeight="400.0" prefWidth="700.0">
+    <ScrollPane fitToHeight="false" fitToWidth="false" layoutX="51.0" layoutY="63.0" pannable="false" prefHeight="405.0" prefWidth="705.0">
       <content>
-        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="548.0" />
+        <AnchorPane id="Content" fx:id="paneGameField" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="700.0" />
       </content>
     </ScrollPane>
     <Button layoutX="200.0" layoutY="506.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" />
     <Button fx:id="btnSurrender" layoutX="681.0" layoutY="14.0" mnemonicParsing="false" onAction="#notification" prefHeight="36.0" prefWidth="106.0" text="Сдаться" />
     <Button fx:id="btnTestWin" layoutX="509.0" layoutY="14.0" mnemonicParsing="false" onAction="#notification" prefHeight="36.0" prefWidth="150.0" text="Тест &quot;Победа&quot;" />
     <Button id="bntTestLose" fx:id="btnTestLose" layoutX="350.0" layoutY="14.0" mnemonicParsing="false" onAction="#notification" prefHeight="36.0" prefWidth="150.0" text="Тест &quot;Поражение&quot;" />
+    <Button fx:id="addCell" layoutX="176.0" layoutY="15.0" mnemonicParsing="false" onAction="#addCell" prefHeight="36.0" prefWidth="150.0" text="Добавить ячейки" />
   </children>
 </AnchorPane>

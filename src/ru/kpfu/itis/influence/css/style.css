@@ -1,0 +1,65 @@
+@font-face {
+    font-family: Hacked;
+    src: url('../fonts/hacked.ttf');
+}
+
+@font-face {
+    font-family: Trench;
+    src: url('../fonts/trench.ttf');
+}
+
+#logo {
+    -fx-font-family: 'Trench';
+    -fx-font-size: 120px;
+    -fx-alignment: center;
+    -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
+}
+
+#main-menu {
+    -fx-background-image: url("../img/background.jpg");
+    -fx-background-repeat: stretch;
+}
+
+#main-menu-button-blue {
+    -fx-background-color:
+            black;
+    -fx-border-color: linear-gradient(cornflowerblue, #0055D6);
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
+    -fx-font-size: 19px;
+}
+
+#main-menu-button-red {
+    -fx-background-color:
+            black;
+    -fx-border-color: linear-gradient(lightcoral, darkred);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: linear-gradient(lightcoral, darkred);
+    -fx-font-size: 15px;
+}
+
+#main-menu-button-green {
+    -fx-background-color:
+            black;
+    -fx-border-color: linear-gradient(lightgreen, forestgreen);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: linear-gradient(lightgreen, forestgreen);
+    -fx-font-size: 19px;
+}
+
+
+#main-menu-button Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);
+}
