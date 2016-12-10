@@ -14,7 +14,8 @@ public class Server {
 
     private final int PORT = 3456;
 
-    public  Server() {}
+    public  Server() {
+    }
 
     private void go() throws IOException {
 
@@ -22,8 +23,12 @@ public class Server {
 
         while (true) {
             Socket socket1 = serverSocket.accept();
+            System.out.println("First player connected");
             Socket socket2 = serverSocket.accept();
+            System.out.println("Second player connected");
+            System.out.println("Room creating...");
             new Room(socket1, socket2);
+            System.out.println("Room created");
         }
 
     }

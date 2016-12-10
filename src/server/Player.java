@@ -1,9 +1,6 @@
 package server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -14,21 +11,21 @@ import java.net.Socket;
  */
 public class Player{
     private Socket socket;
-    private BufferedReader bufferedReader;
-    private PrintWriter printWriter;
+    private BufferedInputStream bufferedInputStream;
+    private BufferedOutputStream bufferedOutputStream;
 
     public Player(Socket socket) throws IOException {
         this.socket = socket;
-        this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        this.printWriter = new PrintWriter(socket.getOutputStream(), true);
+        this.bufferedInputStream = new BufferedInputStream(socket.getInputStream());
+        this.bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
     }
 
-    public BufferedReader getBufferedReader() {
-        return bufferedReader;
+    public BufferedInputStream getBufferedInputStream() {
+        return bufferedInputStream;
     }
 
-    public PrintWriter getPrintWriter() {
-        return printWriter;
+    public BufferedOutputStream getBufferedOutputStream() {
+        return bufferedOutputStream;
     }
 
     public Socket getSocket() {

@@ -51,8 +51,7 @@ public class GraphGenerator {
         }
     }
 
-
-    public  void generate(){
+    public void generate(){
 
         int cellNum = random.nextInt(cellsMaxCount);
         addCell(cellNum);
@@ -72,8 +71,6 @@ public class GraphGenerator {
         }
 
         addRoutes();
-
-        printMap();
     }
 
 
@@ -161,6 +158,40 @@ public class GraphGenerator {
         toCell.setRouteCount(toCell.getRouteCount() + 1);
     }
 
+    public byte[] getByteCells() {
+        byte[] cells = new byte[cellsMaxCount];
+
+        for (int i = 0; i < cellsMaxCount; i++){
+            if (cellsMap.get(i) == null)
+                cells[i] = 0;
+            else
+                cells[i] = (byte) cellsMap.get(i).getSize();
+        }
+
+        for (int i = 0; i < cells.length; i++)
+            System.out.print((int)cells[i] + " ");
+        System.out.println();
+
+        return cells;
+    }
+
+    public byte[] getByteRoutes() {
+        List<Byte> routesList = new ArrayList<>();
+        for (int fromCellNum: routesMap.keySet() ){
+            for (int toCellNum : routesMap.get(fromCellNum)) {
+                routesList.add((byte) fromCellNum);
+                routesList.add((byte) toCellNum);
+            }
+        }
+        byte[] routes = new  byte[routesList.size()];
+        for (int i = 0; i < routesList.size(); i++)
+            routes[i] = routesList.get(i);
+
+        for (int i = 0; i < routes.length; i++)
+            System.out.print((int)routes[i] + " ");
+        System.out.println();
+        return routes;
+    }
 
     private void printMap() {
         System.out.println("--------------------------");
@@ -189,11 +220,5 @@ public class GraphGenerator {
         } else {
             System.out.print("  ");
         }
-    }
-
-
-    public static void main(String[] args) {
-        GraphGenerator graphGenerator = new GraphGenerator();
-        graphGenerator.generate();
     }
 }

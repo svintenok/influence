@@ -1,9 +1,7 @@
 package client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
+import java.math.BigInteger;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -19,31 +17,47 @@ public class Client {
     private static final String HOST = "localhost";
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
 
         Socket s = new Socket(HOST, PORT);
 
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(s.getInputStream()));
-        PrintWriter printWriter = new PrintWriter(s.getOutputStream(), true);
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(s.getInputStream());
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(s.getOutputStream());
 
-        String number = bufferedReader.readLine();
-        if (number.equals("1")){
+        byte[] cells = new byte[bufferedInputStream.read()];
+        bufferedInputStream.read(cells);
+        for (int i = 0; i < cells.length; i++)
+            System.out.print(cells[i]  + " ");
+        System.out.println();
+
+        byte[] routesArraySize = new byte[2];
+        bufferedInputStream.read(routesArraySize);
+        byte[] routes = new byte[new BigInteger(routesArraySize).intValue()];
+        bufferedInputStream.read(routes);
+        for (int i = 0; i < routes.length; i++)
+            System.out.print(routes[i]  + " ");
+        System.out.println();
+
+        int number = bufferedInputStream.read();
+        if (number == 1){
             System.out.println("Ваш ход: ");
-            String outAction = scanner.nextLine();
-            printWriter.println(outAction);
+            int outAction = scanner.nextInt();
+            bufferedOutputStream.write(outAction);
+            bufferedOutputStream.flush();
         }
 
 
         while (true) {
 
             System.out.println("Ожидание хода противника... ");
-            String inAction = bufferedReader.readLine();
+            int inAction = bufferedInputStream.read();
             System.out.println("Ход противника: " + inAction);
 
             System.out.println("Ваш ход: ");
-            String outAction = scanner.nextLine();
-            printWriter.println(outAction);
+            int outAction = scanner.nextInt();
+            bufferedOutputStream.write(outAction);
+            bufferedOutputStream.flush();
         }
     }
 }
