@@ -52,6 +52,7 @@ public class MainMenuController implements Initializable {
             Stage stage = (Stage) btnMainMenuPlayGame.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource(resource));
             Scene scene = new Scene(root);
+            //scene.getStylesheets().add(this.getClass().getResource("../css/style.css").toExternalForm());
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

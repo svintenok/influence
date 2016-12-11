@@ -1,11 +1,27 @@
 @font-face {
-    font-family: Hacked;
-    src: url('../fonts/hacked.ttf');
+    font-family: Trench;
+    src: url('../fonts/trench.ttf');
 }
 
 @font-face {
-    font-family: Trench;
-    src: url('../fonts/trench.ttf');
+    font-family: Xenara;
+    src: url('../fonts/xenara.ttf');
+}
+
+#game-field {
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+
+#rules {
+    -fx-font-family: 'Xenara';
+    -fx-label-padding: 30px;
+    -fx-font-size: 20px;
+    -fx-text-alignment: justify;
+    -fx-border-color: linear-gradient(#0055D6, cornflowerblue);
+    -fx-background-color: transparent;
+    -fx-text-fill: cornflowerblue;
+    -fx-border-width: 3px;
+    -fx-border-radius: 3px;
 }
 
 #logo {
@@ -15,12 +31,12 @@
     -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
 }
 
-#main-menu {
+#background {
     -fx-background-image: url("../img/background.jpg");
     -fx-background-repeat: stretch;
 }
 
-#main-menu-button-blue {
+#button-blue {
     -fx-background-color:
             black;
     -fx-border-color: linear-gradient(cornflowerblue, #0055D6);
@@ -30,10 +46,10 @@
     -fx-background-radius: 3,2,2,2;
     -fx-padding: 12 30 12 30;
     -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
-    -fx-font-size: 19px;
+    -fx-font-size: 20px;
 }
 
-#main-menu-button-red {
+#button-red {
     -fx-background-color:
             black;
     -fx-border-color: linear-gradient(lightcoral, darkred);
@@ -43,10 +59,10 @@
     -fx-background-radius: 3,2,2,2;
     -fx-padding: 12 30 12 30;
     -fx-text-fill: linear-gradient(lightcoral, darkred);
-    -fx-font-size: 15px;
+    -fx-font-size: 20px;
 }
 
-#main-menu-button-green {
+#button-green {
     -fx-background-color:
             black;
     -fx-border-color: linear-gradient(lightgreen, forestgreen);
@@ -56,9 +72,21 @@
     -fx-background-radius: 3,2,2,2;
     -fx-padding: 12 30 12 30;
     -fx-text-fill: linear-gradient(lightgreen, forestgreen);
-    -fx-font-size: 19px;
+    -fx-font-size: 20px;
 }
 
+#button-surrender {
+    -fx-background-image: url("../img/whiteflag.png");
+    -fx-background-position: center;
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: black;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+
+}
 
 #main-menu-button Text {
     -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.8) , 0, 0.0 , 0 , 1);

@@ -30,6 +30,7 @@ public class Cell {
     public Cell() {
         try {
             cell = FXMLLoader.load(getClass().getResource(CELL_FXML));
+            setColor(Color.GRAY);
             //cell.getChildren().get(0).setScaleX(0.8);
             //cell.getChildren().get(0).setScaleY(0.8);
 
@@ -55,9 +56,9 @@ public class Cell {
 
     public void setColor(Color color) {
         Polygon innerHexagon = (Polygon) cell.getChildren().get(0);
-        Polygon outerBorder = (Polygon) cell.getChildren().get(1);
+        Polygon outerStroke = (Polygon) cell.getChildren().get(1);
         innerHexagon.setFill(color);
-        outerBorder.setStroke(color);
+        outerStroke.setStroke(color);
     }
 
     public void setValue(Integer value) {
