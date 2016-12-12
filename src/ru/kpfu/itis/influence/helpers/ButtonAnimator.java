@@ -1,4 +1,4 @@
-package ru.kpfu.itis.influence.controllers;
+package ru.kpfu.itis.influence.helpers;
 
 import javafx.animation.*;
 import javafx.scene.control.Button;
