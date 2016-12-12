@@ -33,7 +33,7 @@ public class GameField {
     private static double x;
     private static double y;
 
-    // Default construvto
+    // Default constructor
 
     public GameField(int rows, int columns, Pane pane) {
 
@@ -120,6 +120,10 @@ public class GameField {
         }
 
         return cells;
+    }
+
+    private static List<Cell> convertMapToCellsList(List<?> map) {
+        return null;
     }
 
 }

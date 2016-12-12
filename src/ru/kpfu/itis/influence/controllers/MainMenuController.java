@@ -52,7 +52,6 @@ public class MainMenuController implements Initializable {
             Stage stage = (Stage) btnMainMenuPlayGame.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource(resource));
             Scene scene = new Scene(root);
-            //scene.getStylesheets().add(this.getClass().getResource("../css/style.css").toExternalForm());
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -60,23 +59,6 @@ public class MainMenuController implements Initializable {
         }
     }
 
-/*
-    public void goToGame(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) btnMainMenuPlayGame.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/game.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void goToRules(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) btnMainMenuRules.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/rules.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }

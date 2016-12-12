@@ -49,6 +49,8 @@ public class GameController implements Initializable {
     private Button btnTestWin;
     @FXML
     private Button btnTestLose;
+    @FXML
+    private Button btnGamePlay;
 
     // Buttons from Win/Lose pop-up windows
     @FXML
@@ -69,6 +71,7 @@ public class GameController implements Initializable {
     @FXML
     private AnchorPane paneGameField;
 
+    // Наброски для тестинга конструктора gameField
     private static LinkedList<Cell> cells = new LinkedList<>();
 
     private static double x;
@@ -120,63 +123,6 @@ public class GameController implements Initializable {
         }
     }
 
-/*
-
-    // Next three methods look like the same method with different parameter in getResource() and setTitle() methods
-    // I think they may be united into one notification method
-
-    public void winNotification (ActionEvent actionEvent) {
-        try {
-            Stage modalStage = new Stage();
-            Parent modalWindow = FXMLLoader.load(getClass().getResource("../fxml/win.fxml"));
-            modalStage.setTitle("Win");
-            modalStage.setMinWidth(300);
-            modalStage.setMinHeight(150);
-            modalStage.setResizable(false);
-            modalStage.setScene(new Scene(modalWindow));
-            modalStage.initModality(Modality.WINDOW_MODAL);
-            modalStage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
-            modalStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void loseNotification(ActionEvent actionEvent) {
-        try {
-            Stage modalStage = new Stage();
-            Parent modalWindow = FXMLLoader.load(getClass().getResource("../fxml/lose.fxml"));
-            modalStage.setTitle("Lose");
-            modalStage.setMinHeight(150);
-            modalStage.setMinWidth(300);
-            modalStage.setResizable(false);
-            modalStage.setScene(new Scene(modalWindow));
-            modalStage.initModality(Modality.WINDOW_MODAL);
-            modalStage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
-            modalStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void surrender(ActionEvent actionEvent) {
-        try {
-            Stage modalStage = new Stage();
-            Parent modalWindow = FXMLLoader.load(getClass().getResource("../fxml/surrender.fxml"));
-            modalStage.setTitle("Подтверждение");
-            modalStage.setMinWidth(300);
-            modalStage.setMinHeight(150);
-            modalStage.setResizable(false);
-            modalStage.setScene(new Scene(modalWindow));
-            modalStage.initModality(Modality.WINDOW_MODAL);
-            modalStage.initOwner(((Node)actionEvent.getSource()).getScene().getWindow());
-            modalStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-*/
-
     public void winEvent(ActionEvent actionEvent) {
         Stage modalStage = (Stage) btnWinNotificationOk.getScene().getWindow();
         modalStage.close();
@@ -194,6 +140,7 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        System.out.println("GameController initialized.");
+        ButtonAnimator.animate(btnGamePlay);
     }
 }
