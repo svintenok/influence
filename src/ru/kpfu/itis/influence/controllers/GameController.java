@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import ru.kpfu.itis.influence.helpers.ButtonAnimator;
 import ru.kpfu.itis.influence.models.Cell;
 import ru.kpfu.itis.influence.models.GameField;
@@ -111,6 +112,7 @@ public class GameController implements Initializable {
             Stage modalStage = new Stage();
             Parent modalWindow = FXMLLoader.load(getClass().getResource(resource));
             modalStage.setTitle(title);
+            modalStage.initStyle(StageStyle.UNDECORATED);
             modalStage.setMinWidth(300);
             modalStage.setMinHeight(150);
             modalStage.setResizable(false);

@@ -95,10 +95,28 @@
     -fx-padding: 5px;
 }
 
-#modal-window-red {
+#lose-window {
     -fx-background-color: black;
+    -fx-border-color: linear-gradient(lightcoral, darkred);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
 }
 
-#modal-window-green {
+#lose-label {
+    -fx-font-size: 30px;
+    -fx-text-fill: linear-gradient(lightcoral, darkred);
+}
 
+#win-window {
+    -fx-background-color: black;
+    -fx-text-fill: forestgreen;
+    -fx-border-color: linear-gradient(lightgreen, forestgreen);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-font-size: 30px;
+}
+
+#win-label {
+    -fx-font-size: 30px;
+    -fx-text-fill: linear-gradient(lightgreen, forestgreen);
 }
