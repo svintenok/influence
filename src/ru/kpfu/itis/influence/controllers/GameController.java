@@ -50,7 +50,7 @@ public class GameController implements Initializable {
     @FXML
     private Button btnGamePlay;
 
-    private boolean btnGamePlayAnimated = false;
+    private static boolean btnGamePlayAnimated = false;
 
     // Buttons from Win/Lose pop-up windows
     @FXML
@@ -141,9 +141,6 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("GameController initialized.");
-//        if (!btnGamePlayAnimated) {
-//            ButtonAnimator.animate(btnGamePlay);
-//            btnGamePlayAnimated = true;
-//        }
+        ButtonAnimator.animate(btnGamePlay);
     }
 }

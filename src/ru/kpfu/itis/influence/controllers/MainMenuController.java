@@ -34,6 +34,8 @@ public class MainMenuController implements Initializable {
     @FXML
     private Button btnMainMenuExit;
 
+    private static boolean btnsAnimated = false;
+
     public void goTo(ActionEvent actionEvent) {
 
         if (actionEvent.getSource().equals(btnMainMenuExit)) {

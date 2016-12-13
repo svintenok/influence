@@ -16,9 +16,9 @@ public class ButtonAnimator {
         colorAdjust.setBrightness(0.0);
 
         Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(1),
+                new KeyFrame(Duration.seconds(2),
                         new KeyValue(colorAdjust.brightnessProperty(), colorAdjust.brightnessProperty().getValue(), Interpolator.LINEAR)),
-                new KeyFrame(Duration.seconds(0.5), new KeyValue(colorAdjust.brightnessProperty(), -0.5, Interpolator.LINEAR))
+                new KeyFrame(Duration.seconds(1), new KeyValue(colorAdjust.brightnessProperty(), -0.5, Interpolator.LINEAR))
         );
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.setAutoReverse(true);
@@ -31,22 +31,6 @@ public class ButtonAnimator {
             timeline.stop();
             btn.setEffect(null);
         });
-
-
-        /*
-        FillTransition fillTransition = new FillTransition(Duration.seconds(0.5), bg);
-            this.setOnMouseEntered(mouseEvent -> {
-                fillTransition.setFromValue(Color.DARKGRAY);
-                fillTransition.setToValue(Color.DARKGOLDENROD);
-                fillTransition.setCycleCount(Animation.INDEFINITE);
-                fillTransition.setAutoReverse(true);
-                fillTransition.play();
-            });
-            this.setOnMouseExited(mouseEvent -> {
-                fillTransition.stop();
-                bg.setFill(Color.WHITE);
-            });
-         */
     }
 
 }
