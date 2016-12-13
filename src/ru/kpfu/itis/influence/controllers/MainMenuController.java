@@ -53,6 +53,7 @@ public class MainMenuController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource(resource));
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            btnsAnimated = false;
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,8 +63,11 @@ public class MainMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("MainController initialized!");
-        ButtonAnimator.animate(btnMainMenuPlayGame);
-        ButtonAnimator.animate(btnMainMenuRules);
-        ButtonAnimator.animate(btnMainMenuExit);
+        if (!btnsAnimated) {
+            ButtonAnimator.animate(btnMainMenuPlayGame);
+            ButtonAnimator.animate(btnMainMenuRules);
+            ButtonAnimator.animate(btnMainMenuExit);
+            btnsAnimated = true;
+        }
     }
 }

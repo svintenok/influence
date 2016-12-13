@@ -29,12 +29,16 @@ public class RulesController implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("../fxml/main_menu.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        btnRulesBackAnimated = false;
         stage.show();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("RulesControlled initialized!");
-        ButtonAnimator.animate(btnRulesBack);
+        if (!btnRulesBackAnimated) {
+            ButtonAnimator.animate(btnRulesBack);
+            btnRulesBackAnimated = true;
+        }
     }
 }

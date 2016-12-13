@@ -141,6 +141,9 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("GameController initialized.");
-        ButtonAnimator.animate(btnGamePlay);
+        if (!btnGamePlayAnimated) {
+            ButtonAnimator.animate(btnGamePlay);
+            btnGamePlayAnimated = true;
+        }
     }
 }
