@@ -12,20 +12,24 @@ import javafx.util.Duration;
 public class ButtonAnimator {
 
     public static void animate(Button btn) {
-
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setBrightness(0.0);
 
-        btn.setEffect(colorAdjust);
-        btn.setOnMouseEntered(mouseEvent -> {
-            Timeline timeline = new Timeline(
-                new KeyFrame(Duration.seconds(0.5),
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(1),
                         new KeyValue(colorAdjust.brightnessProperty(), colorAdjust.brightnessProperty().getValue(), Interpolator.LINEAR)),
-                        new KeyFrame(Duration.seconds(1), new KeyValue(colorAdjust.brightnessProperty(), -1, Interpolator.LINEAR))
-            );
-            timeline.setCycleCount(1);
-            timeline.setAutoReverse(false);
+                new KeyFrame(Duration.seconds(0.5), new KeyValue(colorAdjust.brightnessProperty(), -0.5, Interpolator.LINEAR))
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.setAutoReverse(true);
+        btn.setOnMouseEntered(mouseEvent -> {
+            btn.setEffect(colorAdjust);
             timeline.play();
+        });
+
+        btn.setOnMouseExited(mouseEvent -> {
+            timeline.stop();
+            btn.setEffect(null);
         });
 
 

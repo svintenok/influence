@@ -1,5 +1,6 @@
 package ru.kpfu.itis.influence.controllers;
 
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import ru.kpfu.itis.influence.helpers.ButtonAnimator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,12 +33,6 @@ public class MainMenuController implements Initializable {
     private Button btnMainMenuPlayGame;
     @FXML
     private Button btnMainMenuExit;
-
-/*
-    public void exitGame(ActionEvent actionEvent) {
-        System.exit(0);
-    }
-*/
 
     public void goTo(ActionEvent actionEvent) {
 
@@ -61,5 +59,9 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("MainController initialized!");
+        ButtonAnimator.animate(btnMainMenuPlayGame);
+        ButtonAnimator.animate(btnMainMenuRules);
+        ButtonAnimator.animate(btnMainMenuExit);
     }
 }

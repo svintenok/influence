@@ -94,3 +94,11 @@
     -fx-border-radius: 5px;
     -fx-padding: 5px;
 }
+
+#modal-window-red {
+    -fx-background-color: black;
+}
+
+#modal-window-green {
+
+}
