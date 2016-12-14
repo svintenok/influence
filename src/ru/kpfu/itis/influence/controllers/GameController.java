@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -95,7 +96,11 @@ public class GameController implements Initializable {
 
     public void notification(ActionEvent actionEvent) {
 
+        double shiftX = 255;
+        double shiftY = 200;
+
         if (actionEvent.getSource().equals(btnSurrender)) {
+            shiftX = 175;
             resource = SURRENDER_FXML;
             title = SURRENDER_TITLE;
         }
@@ -109,9 +114,19 @@ public class GameController implements Initializable {
         }
 
         try {
+
+            Node parent = ((Node) actionEvent.getSource()).getParent();
+
+            Bounds boundsInScreen = parent.localToScreen(parent.getBoundsInLocal());
+
+            double coordinateX = boundsInScreen.getMinX();
+            double coordinateY = boundsInScreen.getMinY();
+
             Stage modalStage = new Stage();
             Parent modalWindow = FXMLLoader.load(getClass().getResource(resource));
             modalStage.setTitle(title);
+            modalStage.setX(coordinateX + shiftX);
+            modalStage.setY(coordinateY + shiftY);
             modalStage.initStyle(StageStyle.UNDECORATED);
             modalStage.setMinWidth(300);
             modalStage.setMinHeight(150);

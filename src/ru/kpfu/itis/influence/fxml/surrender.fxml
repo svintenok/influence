@@ -7,9 +7,9 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="lose-window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="450.0" stylesheets="@../css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.influence.controllers.GameController">
+<AnchorPane id="surrender-window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="450.0" stylesheets="@../css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.influence.controllers.GameController">
   <children>
-    <Label id="lose-label" alignment="CENTER" layoutX="100.0" layoutY="14.0" prefHeight="61.0" prefWidth="272.0" text="Are you sure?">
+    <Label id="surrender-label" alignment="CENTER" layoutX="100.0" layoutY="14.0" prefHeight="61.0" prefWidth="272.0" text="Are you sure?">
       <font>
         <Font size="15.0" />
       </font>

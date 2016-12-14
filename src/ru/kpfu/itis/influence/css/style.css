@@ -120,3 +120,17 @@
     -fx-font-size: 30px;
     -fx-text-fill: linear-gradient(lightgreen, forestgreen);
 }
+
+#surrender-window {
+    -fx-background-color: black;
+    -fx-text-fill: forestgreen;
+    -fx-border-color: linear-gradient(whitesmoke, lightgray);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-font-size: 30px;
+}
+
+#surrender-label {
+    -fx-font-size: 30px;
+    -fx-text-fill: linear-gradient(whitesmoke, lightgray);
+}
