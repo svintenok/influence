@@ -1,5 +1,6 @@
 package ru.kpfu.itis.influence.controllers;
 
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +9,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import ru.kpfu.itis.influence.helpers.ButtonAnimator;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,11 +34,7 @@ public class MainMenuController implements Initializable {
     @FXML
     private Button btnMainMenuExit;
 
-/*
-    public void exitGame(ActionEvent actionEvent) {
-        System.exit(0);
-    }
-*/
+    private static boolean btnsAnimated = false;
 
     public void goTo(ActionEvent actionEvent) {
 
@@ -53,30 +53,21 @@ public class MainMenuController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource(resource));
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            btnsAnimated = false;
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-/*
-    public void goToGame(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) btnMainMenuPlayGame.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/game.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void goToRules(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) btnMainMenuRules.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("../fxml/rules.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-*/
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("MainController initialized!");
+        if (!btnsAnimated) {
+            ButtonAnimator.animate(btnMainMenuPlayGame);
+            ButtonAnimator.animate(btnMainMenuRules);
+            ButtonAnimator.animate(btnMainMenuExit);
+            btnsAnimated = true;
+        }
     }
 }

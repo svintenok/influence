@@ -30,8 +30,10 @@ public class GameField {
     private static final double START_X = 0;
     private static final double START_Y = 0;
 
-    private static double x = 0;
-    private static double y = 0;
+    private static double x;
+    private static double y;
+
+    // Default constructor
 
     public GameField(int rows, int columns, Pane pane) {
 
@@ -42,6 +44,9 @@ public class GameField {
     public GameField(int rows, int columns, Pane pane, List<Cell> cellsList) {
 
         pane.setPrefSize(SHIFT_X * columns, SHIFT_Y * rows);
+        pane.getChildren().clear();
+        x = 0;
+        y = 0;
         System.out.println(SHIFT_X * columns);
         System.out.println(SHIFT_Y * rows);
 
@@ -115,6 +120,10 @@ public class GameField {
         }
 
         return cells;
+    }
+
+    private static List<Cell> convertMapToCellsList(List<?> map) {
+        return null;
     }
 
 }
