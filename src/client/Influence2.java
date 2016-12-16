@@ -1,5 +1,7 @@
 package client;
 
+import client.models.GameMap;
+
 import java.io.*;
 import java.math.BigInteger;
 import java.net.Socket;
@@ -11,10 +13,16 @@ import java.util.Scanner;
  * Group: 11-501
  * Project: influence
  */
-public class Client {
+public class Influence2 {
 
     private static final int PORT = 3456;
     private static final String HOST = "localhost";
+    private GameMap gameMap;
+    private static int orderNumber;
+
+    public void startInfluence(){
+
+    }
 
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -39,8 +47,21 @@ public class Client {
             System.out.print(routes[i]  + " ");
         System.out.println();
 
-        int number = bufferedInputStream.read();
-        if (number == 1){
+        GameMap gameMap = GameMap.createGameMap(cells, routes);
+        gameMap.printGameMap();
+
+        orderNumber = bufferedInputStream.read();
+
+        int cell1  = bufferedInputStream.read();
+        System.out.println(cell1);
+        gameMap.getCell(cell1).setType(1);
+        int cell2 = bufferedInputStream.read();
+        System.out.println(cell2);
+        gameMap.getCell(cell2).setType(2);
+
+        gameMap.printGameMap();
+
+        if (orderNumber == 1){
             System.out.println("Ваш ход: ");
             int outAction = scanner.nextInt();
             bufferedOutputStream.write(outAction);

@@ -13,7 +13,6 @@ import java.util.*;
 
 /**
  * First version!
- * Planned generation with removing cells and checking cell for bridge edges
  */
 public class GraphGenerator {
 
@@ -71,6 +70,8 @@ public class GraphGenerator {
         }
 
         addRoutes();
+
+        printMap();
     }
 
 
@@ -161,11 +162,11 @@ public class GraphGenerator {
     public byte[] getByteCells() {
         byte[] cells = new byte[cellsMaxCount];
 
-        for (int i = 0; i < cellsMaxCount; i++){
+        for (int i = 1; i <= cellsMaxCount; i++){
             if (cellsMap.get(i) == null)
-                cells[i] = 0;
+                cells[i - 1] = 0;
             else
-                cells[i] = (byte) cellsMap.get(i).getSize();
+                cells[i - 1] = (byte) cellsMap.get(i).getSize();
         }
 
         for (int i = 0; i < cells.length; i++)
@@ -220,5 +221,9 @@ public class GraphGenerator {
         } else {
             System.out.print("  ");
         }
+    }
+
+    public Cell getCell(int cellNum){
+        return cellsMap.get(cellNum);
     }
 }

@@ -3,9 +3,7 @@ package server;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Author: Svintenok Kate
@@ -17,6 +15,7 @@ public class Room implements Runnable{
     private Thread thread;
     private List<Player> players;
     private GraphGenerator graphGenerator;
+    private Random random;
 
 
     public Room(Socket socket1, Socket socket2) throws IOException {
@@ -24,10 +23,11 @@ public class Room implements Runnable{
         players.add(new Player(socket1));
         players.add(new Player(socket2));
 
-        System.out.println("Map generating..");
+        System.out.println("GameMap generating..");
         graphGenerator = new GraphGenerator();
         graphGenerator.generate();
 
+        this.random = new Random();
         this.thread = new Thread(this);
         this.thread.start();
     }
@@ -36,7 +36,8 @@ public class Room implements Runnable{
     public void run() {
 
         sendMap();
-        sendMoveOrder();
+        sendOrder();
+        sendStartingCells();
 
         boolean flag = true;
 
@@ -56,21 +57,46 @@ public class Room implements Runnable{
 
             for (Player player: players) {
                 player.getBufferedOutputStream().write(cells.length);
+                System.out.println(cells.length);
                 player.getBufferedOutputStream().write(cells);
                 player.getBufferedOutputStream().write(BigInteger.valueOf(routes.length).toByteArray());
+                System.out.println(routes.length);
                 player.getBufferedOutputStream().write(routes);
                 player.getBufferedOutputStream().flush();
             }
 
-            System.out.println("Map sended");
+            System.out.println("GameMap sended");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
+    private void sendStartingCells() {
+        Set<Integer> occupiedCells = new HashSet<>();
 
-    private void sendMoveOrder() {
+        for (int i = 0; i < players.size(); i++){
+            int cellNum;
+            do {
+                cellNum = random.nextInt(graphGenerator.cellsMaxCount);
+            } while (graphGenerator.getCell(cellNum) == null || occupiedCells.contains(cellNum));
+
+            occupiedCells.add(cellNum);
+
+            try {
+                for (Player player: players){
+                    player.getBufferedOutputStream().write(cellNum);
+                    player.getBufferedOutputStream().flush();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Starting cells sended");
+    }
+
+
+    private void sendOrder() {
         try {
             int i = 1;
             for (Player player: players){
