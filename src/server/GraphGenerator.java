@@ -77,7 +77,7 @@ public class GraphGenerator {
 
     private void addCell(int cellNum) {
 
-        int cellSize = random.nextDouble() > bigCellsPercent? 1 : 2;
+        int cellSize = random.nextDouble() > bigCellsPercent? 8 : 12;
         cellsMap.put(cellNum, new Cell(cellSize));
 
         addReachableCells(cellNum);

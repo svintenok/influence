@@ -41,7 +41,7 @@ public class GameMap {
     }
 
 
-    public void printGameMap(){
+    public void printGameMap(String view){
 
         System.out.println("--------------------------");
         for (int i = 1; i <= maxY; i++) {
@@ -49,10 +49,10 @@ public class GameMap {
                 System.out.print(" ");
 
             for (int j = 1; j < maxX; j++)
-                printCell((i - 1) * (maxX - 1) + ((i - 1) / 2) + j);
+                printCell((i - 1) * (maxX - 1) + ((i - 1) / 2) + j, view);
 
             if (i % 2 == 0)
-                printCell((i - 1) * (maxX - 1) + ((i - 1) / 2) + maxX);
+                printCell((i - 1) * (maxX - 1) + ((i - 1) / 2) + maxX, view);
 
             System.out.println();
         }
@@ -60,13 +60,24 @@ public class GameMap {
         System.out.println(routes);
     }
 
-    public void printCell(int cellNum){
+    public void printCell(int cellNum, String view){
         Cell cell  = getCell(cellNum);
         if (cell != null) {
-            System.out.print(cell.getType() + " ");
+            if (view.equals("type"))
+                System.out.print(cell.getType() + " ");
+            else if (view.equals("power"))
+                System.out.print(cell.getPower() + " ");
+            else if (view.equals("maxPower"))
+                System.out.print(cell.getMaxPower() + " ");
+            else if (view.equals("number"))
+                System.out.print(cell.getNumber() + " ");
         } else {
             System.out.print("  ");
         }
+    }
+
+    public void printGameMap(){
+        printGameMap("type");
     }
 
     public Cell getCell(int cellNum){
@@ -76,6 +87,16 @@ public class GameMap {
                 return cell;
 
         return null;
+    }
+
+    public int getCellsCountByType(int type){
+
+        int count = 0;
+        for (Cell cell: cells)
+            if (cell.getType() == type)
+                count++;
+
+        return count;
     }
 
 }

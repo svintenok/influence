@@ -1,5 +1,6 @@
 package client;
 
+import client.models.Cell;
 import client.models.GameMap;
 
 import java.io.*;
@@ -17,22 +18,95 @@ public class Influence {
 
     private static final int PORT = 3456;
     private static final String HOST = "localhost";
+    private BufferedInputStream bufferedInputStream;
+    private BufferedOutputStream bufferedOutputStream;
+    private Scanner scanner;
     private GameMap gameMap;
-    private static int orderNumber;
+    private int orderNumber;
 
-    public void startInfluence(){
+    public Influence() {
+        try {
+            Socket s = new Socket(HOST, PORT);
+            this.bufferedInputStream = new BufferedInputStream(s.getInputStream());
+            this.bufferedOutputStream = new BufferedOutputStream(s.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.scanner = new Scanner(System.in);
+    }
+
+    public void startInfluence() throws IOException {
+        readMap();
+        orderNumber = bufferedInputStream.read();
+        readStartingCells();
+
+        if (orderNumber == 1){
+
+            givePowers();
+
+            /*
+            System.out.println("Ваш ход: ");
+            int outAction = scanner.nextInt();
+            bufferedOutputStream.write(outAction);
+            bufferedOutputStream.flush();
+            */
+        }
+
+
+        while (true) {
+
+            getEnemyMove();
+            givePowers();
+
+            /*
+            System.out.println("Ожидание хода противника... ");
+            int inAction = bufferedInputStream.read();
+            System.out.println("Ход противника: " + inAction);
+
+            System.out.println("Ваш ход: ");
+            int outAction = scanner.nextInt();
+            bufferedOutputStream.write(outAction);
+            bufferedOutputStream.flush();
+            */
+        }
 
     }
 
+    private void getEnemyMove() throws IOException {
+        int count = bufferedInputStream.read();
+        for (int i = 0; i < count; i++) {
+            Cell cell = gameMap.getCell(bufferedInputStream.read());
+            cell.setPower(cell.getPower() + 1);
+            System.out.println("Противник дал силу ячейке " + cell.getNumber());
+        }
+        gameMap.printGameMap("power");
+    }
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
-        Scanner scanner = new Scanner(System.in);
+    private void givePowers() throws IOException {
+        gameMap.printGameMap("number");
+        System.out.println("Раздача сил ячейкам");
+        bufferedOutputStream.write(gameMap.getCellsCountByType(orderNumber));
+        bufferedOutputStream.flush();
 
-        Socket s = new Socket(HOST, PORT);
+        for(int i = 0; i < gameMap.getCellsCountByType(orderNumber); i++){
+            System.out.println("Введите номер ячейки: ");
+            Cell cell = gameMap.getCell(scanner.nextInt());
+            if (cell.getType() == orderNumber && cell.getPower() < cell.getMaxPower()) {
+                cell.setPower(cell.getPower() + 1);
 
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(s.getInputStream());
-        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(s.getOutputStream());
+                bufferedOutputStream.write(cell.getNumber());
+                bufferedOutputStream.flush();
+            }
+            else {
+                System.out.println("неверная ячейка");
+                i--;
+            }
+        }
+        gameMap.printGameMap("power");
+    }
 
+    private void readMap() throws IOException {
         byte[] cells = new byte[bufferedInputStream.read()];
         bufferedInputStream.read(cells);
 
@@ -49,38 +123,25 @@ public class Influence {
             System.out.print(routes[i]  + " ");
         System.out.println();
 
-        GameMap gameMap = GameMap.createGameMap(cells, routes);
+        gameMap = GameMap.createGameMap(cells, routes);
         gameMap.printGameMap();
-
-        orderNumber = bufferedInputStream.read();
-
-        int cell1  = bufferedInputStream.read();
-        System.out.println(cell1);
-        gameMap.getCell(cell1).setType(1);
-        int cell2 = bufferedInputStream.read();
-        System.out.println(cell2);
-        gameMap.getCell(cell2).setType(2);
-
-        gameMap.printGameMap();
-
-        if (orderNumber == 1){
-            System.out.println("Ваш ход: ");
-            int outAction = scanner.nextInt();
-            bufferedOutputStream.write(outAction);
-            bufferedOutputStream.flush();
-        }
-
-
-        while (true) {
-
-            System.out.println("Ожидание хода противника... ");
-            int inAction = bufferedInputStream.read();
-            System.out.println("Ход противника: " + inAction);
-
-            System.out.println("Ваш ход: ");
-            int outAction = scanner.nextInt();
-            bufferedOutputStream.write(outAction);
-            bufferedOutputStream.flush();
-        }
     }
+
+    private void readStartingCells() throws IOException {
+        Cell cell = gameMap.getCell(bufferedInputStream.read());
+        cell.setType(1);
+        cell.setPower(2);
+        cell = gameMap.getCell(bufferedInputStream.read());
+        cell.setType(2);
+        cell.setPower(3);
+
+        gameMap.printGameMap();
+    }
+
+
+
+    public static void main(String[] args) throws IOException{
+        (new Influence()).startInfluence();
+    }
+
 }

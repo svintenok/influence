@@ -112,11 +112,23 @@ public class Room implements Runnable{
 
     private boolean move(Player movingPlayer, Player waitingPlayer){
         try {
+            System.out.println("Ходит игрок " + (players.indexOf(movingPlayer) + 1));
+            int count = movingPlayer.getBufferedInputStream().read();
+            waitingPlayer.getBufferedOutputStream().write(count);
+            waitingPlayer.getBufferedOutputStream().flush();
+            for (int i = 0; i < count; i++){
+                int cellNum = movingPlayer.getBufferedInputStream().read();
+                waitingPlayer.getBufferedOutputStream().write(cellNum);
+                waitingPlayer.getBufferedOutputStream().flush();
+            }
+
+            /*
             int action = movingPlayer.getBufferedInputStream().read();
             waitingPlayer.getBufferedOutputStream().write(action);
             waitingPlayer.getBufferedOutputStream().flush();
             if (action == 0)
                 return false;
+            */
         } catch (IOException e) {
             e.printStackTrace();
         }
