@@ -99,4 +99,21 @@ public class GameMap {
         return count;
     }
 
+    public boolean isConnected(Cell cell1, Cell cell2) {
+        int fromCellNum;
+        int toCellNum;
+        if (cell1.getNumber() < cell2.getNumber()){
+            fromCellNum = cell1.getNumber();
+            toCellNum = cell2.getNumber();
+        }
+        else {
+            fromCellNum = cell2.getNumber();
+            toCellNum = cell1.getNumber();
+        }
+
+        for (Route route: routes)
+            if (route.getFrom() == fromCellNum && route.getTo() == toCellNum)
+                return true;
+        return false;
+    }
 }

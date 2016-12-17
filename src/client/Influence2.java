@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Group: 11-501
  * Project: influence
  */
-public class Influence {
+public class Influence2 {
 
     private static final int PORT = 3456;
     private static final String HOST = "localhost";
@@ -27,7 +27,7 @@ public class Influence {
 
     private Random random;
 
-    public Influence() {
+    public Influence2() {
 
         this.random = new Random();
 
@@ -48,15 +48,18 @@ public class Influence {
         readStartingCells();
 
         if (orderNumber == 1){
+
             move();
             givePowers();
         }
 
 
         while (true) {
+
             getEnemyMove();
             move();
             givePowers();
+
         }
 
     }
@@ -87,7 +90,7 @@ public class Influence {
                         if (fromCellPower > toCellPower)
                             if (toCell.getMaxPower() < Math.abs(fromCellPower - toCellPower))
                                 fromCell.setPower((toCell.getMaxPower() - (fromCellPower - toCellPower)));
-                            toCell.setType(orderNumber);
+                        toCell.setType(orderNumber);
                     }
                     else {
                         fromCell.setPower(1);
@@ -95,10 +98,10 @@ public class Influence {
                         if (fromCellPower == toCellPower)
                             if (random.nextDouble() > 0.5)
                                 toCell.setPower(orderNumber);
-                        else if (fromCellPower > toCellPower)
+                            else if (fromCellPower > toCellPower)
                                 if (random.nextDouble() > 0.25)
                                     toCell.setPower(orderNumber);
-                        else
+                                else
                                 if (random.nextDouble() > 0.75)
                                     toCell.setPower(orderNumber);
                     }
@@ -202,7 +205,7 @@ public class Influence {
 
 
     public static void main(String[] args) throws IOException{
-        (new Influence()).startInfluence();
+        (new Influence2()).startInfluence();
     }
 
 }
