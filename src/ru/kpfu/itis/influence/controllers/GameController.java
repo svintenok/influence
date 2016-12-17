@@ -37,10 +37,10 @@ public class GameController implements Initializable {
 
     // Titles
 
-    private static final String WIN_TITLE = "Win";
-    private static final String LOSE_TITLE = "Lose";
-    private static final String SURRENDER_TITLE = "Surrender";
-    private static String title;
+//    private static final String WIN_TITLE = "Win";
+//    private static final String LOSE_TITLE = "Lose";
+//    private static final String SURRENDER_TITLE = "Surrender";
+//    private static String title;
 
     // Buttons from game screen
     @FXML
@@ -102,15 +102,15 @@ public class GameController implements Initializable {
         if (actionEvent.getSource().equals(btnSurrender)) {
             shiftX = 175;
             resource = SURRENDER_FXML;
-            title = SURRENDER_TITLE;
+//            title = SURRENDER_TITLE;
         }
         else if (actionEvent.getSource().equals(btnTestLose)) {
             resource = LOSE_FXML;
-            title = LOSE_TITLE;
+//            title = LOSE_TITLE;
         }
         else if (actionEvent.getSource().equals(btnTestWin)) {
             resource = WIN_FXML;
-            title = LOSE_TITLE;
+//            title = LOSE_TITLE;
         }
 
         try {
@@ -124,7 +124,7 @@ public class GameController implements Initializable {
 
             Stage modalStage = new Stage();
             Parent modalWindow = FXMLLoader.load(getClass().getResource(resource));
-            modalStage.setTitle(title);
+//            modalStage.setTitle(title);
             modalStage.setX(coordinateX + shiftX);
             modalStage.setY(coordinateY + shiftY);
             modalStage.initStyle(StageStyle.UNDECORATED);
