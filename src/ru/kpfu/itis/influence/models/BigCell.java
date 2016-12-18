@@ -15,6 +15,8 @@ public class BigCell extends Cell{
         super();
         this.getPaneForm().getChildren().get(0).setScaleX(1.1);
         this.getPaneForm().getChildren().get(0).setScaleY(1.1);
+        this.getPaneForm().getChildren().get(1).setScaleX(1.1);
+        this.getPaneForm().getChildren().get(1).setScaleY(1.1);
         Polygon outerStroke = (Polygon) this.getPaneForm().getChildren().get(1);
         outerStroke.setStrokeWidth(3);
 
@@ -25,8 +27,8 @@ public class BigCell extends Cell{
             if (value < MAX_VALUE) {
                 label.setText(String.valueOf(++value));
                 double scaleX = this.getPaneForm().getChildren().get(0).getScaleX();
-                this.getPaneForm().getChildren().get(0).setScaleX(scaleX + 0.005);
-                this.getPaneForm().getChildren().get(0).setScaleY(scaleX + 0.005);
+                this.getPaneForm().getChildren().get(0).setScaleX(scaleX + 0.009);
+                this.getPaneForm().getChildren().get(0).setScaleY(scaleX + 0.009);
             }
         });
 

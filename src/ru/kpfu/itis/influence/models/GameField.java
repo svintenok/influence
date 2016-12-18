@@ -25,7 +25,7 @@ public class GameField {
     //ObservableList<Cell> map;
 
     private static final double SHIFT_X = 50;
-    private static final double SHIFT_Y = 44.5;
+    private static final double SHIFT_Y = 44;
 
     private static final double START_X = 0;
     private static final double START_Y = 0;
@@ -98,7 +98,7 @@ public class GameField {
         int cellsNumber = rows * columns - rows / 2;
         for (int i = 0; i < cellsNumber; i++) {
             Cell cell;
-            if (i == 17) {
+            if (i == 17 || i == 18 || i == 31) {
                 cell = new BigCell();
             } else {
                 cell = new Cell();
