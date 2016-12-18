@@ -1,4 +1,4 @@
-package server;
+package ru.kpfu.itis.group11501.influence.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;

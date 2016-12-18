@@ -1,4 +1,4 @@
-package client.models;
+package ru.kpfu.itis.group11501.influence.client.models;
 
 /**
  * Author: Svintenok Kate

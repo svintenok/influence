@@ -1,7 +1,7 @@
-package client;
+package ru.kpfu.itis.group11501.influence.client;
 
-import client.models.Cell;
-import client.models.GameMap;
+import ru.kpfu.itis.group11501.influence.client.models.Cell;
+import ru.kpfu.itis.group11501.influence.client.models.GameMap;
 
 import java.io.*;
 import java.math.BigInteger;

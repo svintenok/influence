@@ -1,4 +1,4 @@
-package client.models;
+package ru.kpfu.itis.group11501.influence.client.models;
 
 import java.util.ArrayList;
 import java.util.List;

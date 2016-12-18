@@ -1,6 +1,6 @@
-package server;
+package ru.kpfu.itis.group11501.influence.server;
 
-import server.models.Cell;
+import ru.kpfu.itis.group11501.influence.server.models.Cell;
 
 import java.util.*;
 
