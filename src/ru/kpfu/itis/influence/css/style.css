@@ -1,0 +1,136 @@
+/* Font for the game logotype */
+@font-face {
+    font-family: Trench;
+    src: url('../fonts/trench.ttf');
+}
+
+/* Font for the rules and buttons */
+@font-face {
+    font-family: Xenara;
+    src: url('../fonts/xenara.ttf');
+}
+
+#game-field {
+    -fx-background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Label field for rules */
+#rules {
+    -fx-font-family: 'Xenara';
+    -fx-label-padding: 30px;
+    -fx-font-size: 20px;
+    -fx-text-alignment: justify;
+    -fx-border-color: linear-gradient(#0055D6, cornflowerblue);
+    -fx-background-color: transparent;
+    -fx-text-fill: cornflowerblue;
+    -fx-border-width: 3px;
+    -fx-border-radius: 3px;
+}
+
+/* Main menu game logotype */
+#logo {
+    -fx-font-family: 'Trench';
+    -fx-font-size: 120px;
+    -fx-alignment: center;
+    -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
+}
+
+/* Background for all pages */
+#background {
+    -fx-background-image: url("../img/background.jpg");
+    -fx-background-repeat: stretch;
+}
+
+#button-blue {
+    -fx-font-family: 'Xenara';
+    -fx-background-color: black;
+    -fx-border-color: linear-gradient(cornflowerblue, #0055D6);
+    -fx-border-radius: 2px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
+    -fx-font-size: 20px;
+}
+
+#button-blue:hover {
+}
+
+#button-red {
+    -fx-font-family: 'Xenara';
+    -fx-background-color: black;
+    -fx-border-color: linear-gradient(lightcoral, darkred);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: linear-gradient(lightcoral, darkred);
+    -fx-font-size: 20px;
+}
+
+#button-green {
+    -fx-font-family: 'Xenara';
+    -fx-background-color: black;
+    -fx-border-color: linear-gradient(lightgreen, forestgreen);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: linear-gradient(lightgreen, forestgreen);
+    -fx-font-size: 20px;
+}
+
+#button-surrender {
+    -fx-background-image: url("../img/whiteflag.png");
+    -fx-background-position: center;
+    -fx-background-size: 25px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-color: black;
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+#lose-window {
+    -fx-background-color: black;
+    -fx-border-color: linear-gradient(lightcoral, darkred);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+}
+
+#lose-label {
+    -fx-font-size: 30px;
+    -fx-text-fill: linear-gradient(lightcoral, darkred);
+}
+
+#win-window {
+    -fx-background-color: black;
+    -fx-text-fill: forestgreen;
+    -fx-border-color: linear-gradient(lightgreen, forestgreen);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-font-size: 30px;
+}
+
+#win-label {
+    -fx-font-size: 30px;
+    -fx-text-fill: linear-gradient(lightgreen, forestgreen);
+}
+
+#surrender-window {
+    -fx-background-color: black;
+    -fx-text-fill: forestgreen;
+    -fx-border-color: linear-gradient(whitesmoke, lightgray);
+    -fx-border-radius: 1px;
+    -fx-border-width: 2px;
+    -fx-font-size: 30px;
+}
+
+#surrender-label {
+    -fx-font-size: 30px;
+    -fx-text-fill: linear-gradient(whitesmoke, lightgray);
+}

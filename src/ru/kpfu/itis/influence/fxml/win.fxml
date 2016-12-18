@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="win-window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" stylesheets="@../css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.influence.controllers.GameController">
+  <children>
+    <Label id="win-label" alignment="CENTER" layoutX="50.0" layoutY="25.0" prefHeight="50.0" prefWidth="200.0"  text="You win!" textAlignment="CENTER">
+      <font>
+        <Font size="20.0" />
+      </font>
+    </Label>
+    <Button id="button-green" fx:id="btnWinNotificationOk" layoutX="70.0" layoutY="84.0" mnemonicParsing="false" onAction="#winEvent" prefHeight="40.0" prefWidth="160.0" text="Yeah!" />
+  </children>
+</AnchorPane>
