@@ -1,20 +1,18 @@
-package ru.kpfu.itis.influence.models;
+package ru.kpfu.itis.group11501.influence.client.guiModels;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 
 /**
  * Created by cmen on 08/12/16.
  */
-public class Cell {
+public class Cell{
 
     private static final int MAX_VALUE = 8;
     private static final double PADDING_X = 51.0;
@@ -77,6 +75,4 @@ public class Cell {
         System.out.println("MinY: " + boundsInScene.getMinY());
         return boundsInScene.getMinY() + boundsInScene.getHeight() / 2 - PADDING_Y;
     }
-
-
 }

@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="lose-window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" stylesheets="@../css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.influence.controllers.GameController">
+<AnchorPane id="lose-window" prefHeight="150.0" prefWidth="300.0" stylesheets="@../css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.group11501.influence.client.controllers.GameController">
   <children>
     <Label id="lose-label" alignment="CENTER" layoutX="50.0" layoutY="25.0" prefHeight="50.0" prefWidth="200.0" text="You lose." textAlignment="CENTER">
       <font>

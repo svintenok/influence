@@ -1,4 +1,4 @@
-package ru.kpfu.itis.influence.controllers;
+package ru.kpfu.itis.group11501.influence.client.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,9 +13,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import ru.kpfu.itis.influence.helpers.ButtonAnimator;
-import ru.kpfu.itis.influence.models.Cell;
-import ru.kpfu.itis.influence.models.GameField;
+import ru.kpfu.itis.group11501.influence.client.helpers.ButtonAnimator;
+import ru.kpfu.itis.group11501.influence.client.guiModels.Cell;
+import ru.kpfu.itis.group11501.influence.client.guiModels.GameField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -81,7 +81,7 @@ public class GameController implements Initializable {
     private static double shiftX = 0;
     private static double shiftY = 0;
 
-    public void addCell() {
+    public void addCells() {
 
         gameField = new GameField(9, 14, paneGameField);
 

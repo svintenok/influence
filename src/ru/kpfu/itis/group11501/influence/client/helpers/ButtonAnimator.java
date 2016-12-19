@@ -1,9 +1,8 @@
-package ru.kpfu.itis.influence.helpers;
+package ru.kpfu.itis.group11501.influence.client.helpers;
 
 import javafx.animation.*;
 import javafx.scene.control.Button;
 import javafx.scene.effect.ColorAdjust;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
@@ -32,5 +31,4 @@ public class ButtonAnimator {
             btn.setEffect(null);
         });
     }
-
 }

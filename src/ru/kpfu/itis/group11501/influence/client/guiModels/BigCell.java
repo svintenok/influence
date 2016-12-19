@@ -1,4 +1,4 @@
-package ru.kpfu.itis.influence.models;
+package ru.kpfu.itis.group11501.influence.client.guiModels;
 
 import javafx.scene.control.Label;
 import javafx.scene.shape.Polygon;
@@ -7,7 +7,7 @@ import javafx.scene.shape.Polygon;
  * Created by cmen on 09/12/16.
  */
 
-public class BigCell extends Cell{
+public class BigCell extends Cell {
 
     private static final int MAX_VALUE = 12;
 

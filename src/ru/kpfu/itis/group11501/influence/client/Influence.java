@@ -1,7 +1,12 @@
 package ru.kpfu.itis.group11501.influence.client;
 
-import ru.kpfu.itis.group11501.influence.client.models.Cell;
-import ru.kpfu.itis.group11501.influence.client.models.GameMap;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import ru.kpfu.itis.group11501.influence.client.models.*;
+
 
 import java.io.*;
 import java.math.BigInteger;
@@ -15,19 +20,20 @@ import java.util.Scanner;
  * Group: 11-501
  * Project: influence
  */
-public class Influence {
+public class Influence extends Application {
 
-    private static final int PORT = 3456;
-    private static final String HOST = "localhost";
-    private BufferedInputStream bufferedInputStream;
-    private BufferedOutputStream bufferedOutputStream;
-    private Scanner scanner;
-    private GameMap gameMap;
-    private int orderNumber;
+    //private static final int PORT = 3456;
+    //private static final String HOST = "localhost";
+    private static final String MENU_FXML = "fxml/main_menu.fxml";
+    //private BufferedInputStream bufferedInputStream;
+    //private BufferedOutputStream bufferedOutputStream;
+    //private Scanner scanner;
+    //private GameMap gameMap;
+    //private int orderNumber;
 
-    private Random random;
+    //private Random random;
 
-    public Influence() {
+   /* public Influence() {
 
         this.random = new Random();
 
@@ -41,8 +47,18 @@ public class Influence {
 
         this.scanner = new Scanner(System.in);
     }
+*/
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource(MENU_FXML));
+        primaryStage.setTitle("Influence");
+        Scene scene = new Scene(root, 800, 600);
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
 
-    public void startInfluence() throws IOException {
+  /*  public void startInfluence() throws IOException {
         readMap();
         orderNumber = bufferedInputStream.read();
         readStartingCells();
@@ -199,10 +215,11 @@ public class Influence {
         gameMap.printGameMap();
     }
 
-
+*/
 
     public static void main(String[] args) throws IOException{
-        (new Influence()).startInfluence();
+        launch(args);
+        //(new Influence()).startInfluence();
     }
 
 }

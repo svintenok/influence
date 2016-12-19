@@ -1,4 +1,4 @@
-package ru.kpfu.itis.influence.models;
+package ru.kpfu.itis.group11501.influence.client.guiModels;
 
 import javafx.geometry.Bounds;
 import javafx.scene.shape.Line;

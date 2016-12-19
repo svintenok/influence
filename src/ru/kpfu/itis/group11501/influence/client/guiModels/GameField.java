@@ -1,8 +1,5 @@
-package ru.kpfu.itis.influence.models;
+package ru.kpfu.itis.group11501.influence.client.guiModels;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
