@@ -116,5 +116,4 @@ public class GameMap {
                 return true;
         return false;
     }
-
 }

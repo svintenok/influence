@@ -1,13 +1,13 @@
 /* Font for the game logotype */
 @font-face {
     font-family: Trench;
-    src: url('../fonts/trench.ttf');
+    src: url('../resources/fonts/trench.ttf');
 }
 
 /* Font for the rules and buttons */
 @font-face {
     font-family: Xenara;
-    src: url('../fonts/xenara.ttf');
+    src: url('../resources/fonts/xenara.ttf');
 }
 
 #game-field {
@@ -37,7 +37,7 @@
 
 /* Background for all pages */
 #background {
-    -fx-background-image: url("../img/background.jpg");
+    -fx-background-image: url("../resources/img/background.jpg");
     -fx-background-repeat: stretch;
 }
 
@@ -84,7 +84,7 @@
 }
 
 #button-surrender {
-    -fx-background-image: url("../img/whiteflag.png");
+    -fx-background-image: url("../resources/img/whiteflag.png");
     -fx-background-position: center;
     -fx-background-size: 25px;
     -fx-background-repeat: no-repeat;
