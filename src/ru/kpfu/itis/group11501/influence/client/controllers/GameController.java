@@ -2,22 +2,13 @@ package ru.kpfu.itis.group11501.influence.client.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import ru.kpfu.itis.group11501.influence.client.helpers.ButtonAnimator;
-import ru.kpfu.itis.group11501.influence.client.guiModels.Cell;
-import ru.kpfu.itis.group11501.influence.client.guiModels.GameField;
+import ru.kpfu.itis.group11501.influence.client.helpers.*;
+import ru.kpfu.itis.group11501.influence.client.guiModels.*;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -27,8 +18,7 @@ import java.util.ResourceBundle;
  */
 public class GameController implements Initializable {
 
-    // FXMLResources
-
+    // FXML Resources
     private static final String CELL_FXML = "../fxml/cell.fxml";
     private static final String WIN_FXML = "../fxml/win.fxml";
     private static final String LOSE_FXML = "../fxml/lose.fxml";
@@ -52,7 +42,6 @@ public class GameController implements Initializable {
     @FXML
     private Button btnGamePlay;
 
-    private static boolean btnGamePlayAnimated = false;
 
     // Buttons from Win/Lose pop-up windows
     @FXML
@@ -67,11 +56,13 @@ public class GameController implements Initializable {
     private Button btnSurrenderYes;
 
     // Game field
-
     private GameField gameField;
 
+    // Panes
     @FXML
     private AnchorPane paneGameField;
+    @FXML
+    private AnchorPane gamePane;
 
     // Наброски для тестинга конструктора gameField
     private static LinkedList<Cell> cells = new LinkedList<>();
@@ -102,42 +93,15 @@ public class GameController implements Initializable {
         if (actionEvent.getSource().equals(btnSurrender)) {
             shiftX = 175;
             resource = SURRENDER_FXML;
-//            title = SURRENDER_TITLE;
         }
         else if (actionEvent.getSource().equals(btnTestLose)) {
             resource = LOSE_FXML;
-//            title = LOSE_TITLE;
         }
         else if (actionEvent.getSource().equals(btnTestWin)) {
             resource = WIN_FXML;
-//            title = LOSE_TITLE;
         }
 
-        try {
-
-            Node parent = ((Node) actionEvent.getSource()).getParent();
-
-            Bounds boundsInScreen = parent.localToScreen(parent.getBoundsInLocal());
-
-            double coordinateX = boundsInScreen.getMinX();
-            double coordinateY = boundsInScreen.getMinY();
-
-            Stage modalStage = new Stage();
-            Parent modalWindow = FXMLLoader.load(getClass().getResource(resource));
-//            modalStage.setTitle(title);
-            modalStage.setX(coordinateX + shiftX);
-            modalStage.setY(coordinateY + shiftY);
-            modalStage.initStyle(StageStyle.UNDECORATED);
-            modalStage.setMinWidth(300);
-            modalStage.setMinHeight(150);
-            modalStage.setResizable(false);
-            modalStage.setScene(new Scene(modalWindow));
-            modalStage.initModality(Modality.WINDOW_MODAL);
-            modalStage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
-            modalStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FXMLLoader.openModalWindow(resource, gamePane, shiftX, shiftY);
     }
 
     public void winEvent(ActionEvent actionEvent) {
@@ -157,10 +121,9 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         System.out.println("GameController initialized.");
-        if (!btnGamePlayAnimated) {
-            ButtonAnimator.animate(btnGamePlay);
-            btnGamePlayAnimated = true;
-        }
+        ButtonAnimator.animate(btnGamePlay);
+
     }
 }

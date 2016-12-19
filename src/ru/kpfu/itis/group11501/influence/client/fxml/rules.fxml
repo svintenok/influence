@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="background" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2 " fx:controller="ru.kpfu.itis.group11501.influence.client.controllers.RulesController">
+<AnchorPane id="background" fx:id="rulesPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2 " fx:controller="ru.kpfu.itis.group11501.influence.client.controllers.RulesController">
   <children>
     <Button id="button-green" fx:id="btnRulesBack" layoutX="320.0" layoutY="521.0" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="50.0" prefWidth="160.0" text="Clear" />
     <Label id="rules" layoutX="14.0" layoutY="59.0" prefHeight="446.0" prefWidth="772.0" text="

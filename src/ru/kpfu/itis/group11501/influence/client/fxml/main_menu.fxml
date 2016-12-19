@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane id="background" prefHeight="600.0" stylesheets="@../css/style.css" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.group11501.influence.client.controllers.MainMenuController">
+<Pane id="background" fx:id="menuPane" prefHeight="600.0" stylesheets="@../css/style.css" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.group11501.influence.client.controllers.MainMenuController">
   <children>
     <Button id="button-red" fx:id="btnMainMenuPlayGame" layoutX="326.0" layoutY="230.0" mnemonicParsing="false" onAction="#goTo" prefHeight="50.0" prefWidth="150.0" text="Play" />
     <Button id="button-green" fx:id="btnMainMenuRules" layoutX="325.0" layoutY="300.0" mnemonicParsing="false" onAction="#goTo" prefHeight="50.0" prefWidth="150.0" text="Rules" />
