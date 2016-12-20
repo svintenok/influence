@@ -11,17 +11,17 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 /**
- * Author: Svintenok Kate
+ * Author: Svintenok Kate and Konstantin Menshenin
  * Date: 19.12.2016
  * Group: 11-501
  * Project: influence
  */
-public class FXMLLoader {
+public class Loader {
 
     public static void goTo(String resource, Pane pane){
         try {
             Stage stage = (Stage) pane.getScene().getWindow();
-            Parent root = javafx.fxml.FXMLLoader.load(FXMLLoader.class.getResource(resource));
+            Parent root = javafx.fxml.FXMLLoader.load(Loader.class.getResource(resource));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -39,7 +39,7 @@ public class FXMLLoader {
             double coordinateY = boundsInScreen.getMinY();
 
             Stage modalStage = new Stage();
-            Parent modalWindow = javafx.fxml.FXMLLoader.load(FXMLLoader.class.getResource(resource));
+            Parent modalWindow = javafx.fxml.FXMLLoader.load(Loader.class.getResource(resource));
             modalStage.setX(coordinateX + shiftX);
             modalStage.setY(coordinateY + shiftY);
             modalStage.initStyle(StageStyle.UNDECORATED);

@@ -24,7 +24,7 @@ public class RulesController implements Initializable {
     private Button btnRulesBack;
 
     public void goToMainMenu(ActionEvent actionEvent) {
-        FXMLLoader.goTo(MENU_FXML, rulesPane);
+        Loader.goTo(MENU_FXML, rulesPane);
     }
 
     @Override

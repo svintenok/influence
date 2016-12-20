@@ -43,7 +43,7 @@ public class MainMenuController implements Initializable {
             resource = RULES_FXML;
         }
 
-        FXMLLoader.goTo(resource, menuPane);
+        Loader.goTo(resource, menuPane);
     }
 
     @Override

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Author: Svintenok Kate
+ * Author: Svintenok Kate and Konstantin Menshenin
  * Date: 11.12.2016
  * Group: 11-501
  * Project: influence
@@ -14,8 +14,11 @@ public class GameMap {
     private List<Cell> cells;
     private List<Route> routes;
 
-    public final int maxX = 14;
-    public final int maxY = 9;
+    public final static int maxX = 14;
+    public final static int maxY = 9;
+    public final static int cellsMaxCount = 121;
+
+
 
     public GameMap(List<Cell> cells, List<Route> routes) {
         this.cells = cells;
@@ -24,11 +27,25 @@ public class GameMap {
 
     public static GameMap createGameMap(byte[] cellsBytes, byte[] routesBytes){
 
+        int[] yCoordinatesMap = new int[cellsMaxCount + 1];
+        int[] xCoordinatesMap = new int[cellsMaxCount + 1];
+
+        for (int i = 1; i <= maxY; i++) {
+            for (int j = 1; j < maxX; j++) {
+                yCoordinatesMap[(i - 1) * (maxX - 1) + ((i - 1) / 2) + j] = i;
+                xCoordinatesMap[(i - 1) * (maxX - 1) + ((i - 1) / 2) + j] = j;
+            }
+            if (i % 2 == 0) {
+                yCoordinatesMap[(i - 1) * (maxX - 1) + ((i - 1) / 2) + maxX] = i;
+                xCoordinatesMap[(i - 1) * (maxX - 1) + ((i - 1) / 2) + maxX] = maxX;
+            }
+        }
+
         //Cells creating
         List<Cell> cells = new ArrayList<>();
         for (int i = 0; i < cellsBytes.length; i++){
             if (cellsBytes[i] != 0)
-                cells.add(new Cell( i+1, cellsBytes[i]));
+                cells.add(new Cell(i+1, cellsBytes[i], yCoordinatesMap[i+1], xCoordinatesMap[i+1]));
         }
 
         //Routes creating
@@ -57,13 +74,14 @@ public class GameMap {
             System.out.println();
         }
         System.out.println("--------------------------");
-        System.out.println(routes);
+
+
     }
 
     public void printCell(int cellNum, String view){
         Cell cell  = getCell(cellNum);
         if (cell != null) {
-            if (view.equals("type"))
+           if (view.equals("type"))
                 System.out.print(cell.getType() + " ");
             else if (view.equals("power"))
                 System.out.print(cell.getPower() + " ");
@@ -71,6 +89,7 @@ public class GameMap {
                 System.out.print(cell.getMaxPower() + " ");
             else if (view.equals("number"))
                 System.out.print(cell.getNumber() + " ");
+
         } else {
             System.out.print("  ");
         }
@@ -115,5 +134,13 @@ public class GameMap {
             if (route.getFrom() == fromCellNum && route.getTo() == toCellNum)
                 return true;
         return false;
+    }
+
+    public List<Cell> getCells() {
+        return cells;
+    }
+
+    public List<Route> getRoutes() {
+        return routes;
     }
 }

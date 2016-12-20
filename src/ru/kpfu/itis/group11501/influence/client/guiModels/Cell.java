@@ -75,4 +75,5 @@ public class Cell{
         System.out.println("MinY: " + boundsInScene.getMinY());
         return boundsInScene.getMinY() + boundsInScene.getHeight() / 2 - PADDING_Y;
     }
+
 }

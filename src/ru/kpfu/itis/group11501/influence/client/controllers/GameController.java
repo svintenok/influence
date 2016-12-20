@@ -5,10 +5,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import ru.kpfu.itis.group11501.influence.client.Connection;
 import ru.kpfu.itis.group11501.influence.client.helpers.*;
-import ru.kpfu.itis.group11501.influence.client.guiModels.*;
+import ru.kpfu.itis.group11501.influence.client.models.*;
 
+import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
@@ -19,18 +23,10 @@ import java.util.ResourceBundle;
 public class GameController implements Initializable {
 
     // FXML Resources
-    private static final String CELL_FXML = "../fxml/cell.fxml";
     private static final String WIN_FXML = "../fxml/win.fxml";
     private static final String LOSE_FXML = "../fxml/lose.fxml";
     private static final String SURRENDER_FXML = "../fxml/surrender.fxml";
     private String resource;
-
-    // Titles
-
-//    private static final String WIN_TITLE = "Win";
-//    private static final String LOSE_TITLE = "Lose";
-//    private static final String SURRENDER_TITLE = "Surrender";
-//    private static String title;
 
     // Buttons from game screen
     @FXML
@@ -55,35 +51,14 @@ public class GameController implements Initializable {
     @FXML
     private Button btnSurrenderYes;
 
-    // Game field
-    private GameField gameField;
-
     // Panes
     @FXML
-    private AnchorPane paneGameField;
+    private AnchorPane gameFieldPane;
     @FXML
     private AnchorPane gamePane;
 
-    // Наброски для тестинга конструктора gameField
-    private static LinkedList<Cell> cells = new LinkedList<>();
+    private static GameMap gameMap;
 
-    private static double x;
-    private static double y;
-    private static double shiftX = 0;
-    private static double shiftY = 0;
-
-    public void addCells() {
-
-        gameField = new GameField(9, 14, paneGameField);
-
-        /*
-            Cell cell = new Cell();
-            cell.setColor(Color.BLUE);
-            cell.setValue(12);
-            cells.add(cell);
-            paneGameField.getChildren().add(cells.getLast().getPaneForm());
-        */
-    }
 
     public void notification(ActionEvent actionEvent) {
 
@@ -100,8 +75,7 @@ public class GameController implements Initializable {
         else if (actionEvent.getSource().equals(btnTestWin)) {
             resource = WIN_FXML;
         }
-
-        FXMLLoader.openModalWindow(resource, gamePane, shiftX, shiftY);
+        Loader.openModalWindow(resource, gamePane, shiftX, shiftY);
     }
 
     public void winEvent(ActionEvent actionEvent) {
@@ -119,11 +93,49 @@ public class GameController implements Initializable {
         stage.close();
     }
 
+
+    private void readMap() throws IOException {
+        //cells reading
+        byte[] cells = new byte[Connection.getBufferedInputStream().read()];
+        Connection.getBufferedInputStream().read(cells);
+
+        //routes reading
+        byte[] routesArraySize = new byte[2];
+        Connection.getBufferedInputStream().read(routesArraySize);
+        byte[] routes = new byte[new BigInteger(routesArraySize).intValue()];
+        Connection.getBufferedInputStream().read(routes);
+
+        //logs
+        for (int i = 0; i < cells.length; i++)
+            System.out.print(cells[i]  + " ");
+        System.out.println();
+
+        //logs
+        for (int i = 0; i < routes.length; i++)
+            System.out.print(routes[i]  + " ");
+        System.out.println();
+
+        gameMap = GameMap.createGameMap(cells, routes);
+
+        //logs
+        gameMap.printGameMap();
+
+        for (Cell cell : gameMap.getCells())
+            gameFieldPane.getChildren().add(cell.getCellPane());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         System.out.println("GameController initialized.");
-        ButtonAnimator.animate(btnGamePlay);
+        if (btnGamePlay != null)
+            ButtonAnimator.animate(btnGamePlay);
 
+        if (gameMap == null) {
+            try {
+                readMap();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
