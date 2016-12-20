@@ -1,7 +1,10 @@
 package ru.kpfu.itis.group11501.influence.client.models;
 
 import javafx.geometry.Bounds;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
+
 
 /**
  * Author: Svintenok Kate and Konstantin Menshenin
@@ -17,23 +20,23 @@ public class Route {
     private Line edge;
     private Bounds boundsInScene;
 
-    public Route(int from, int to) {
-        this.from = from;
-        this.to = to;
+    public Route(Cell fromCell, Cell  toCell) {
+        this.from = fromCell.getNumber();
+        this.to = toCell.getNumber();
 
+        edge = new Line();
 
+        edge.setStrokeWidth(2);
+        edge.setStroke(Color.valueOf("DARKGRAY"));
+        edge.setOpacity(0.5);
 
-        //edge.setStrokeWidth(2);
-        /*edge.setStartX(fromCell.getCenterX());
-        System.out.println("StartX: " + fromCell.getCenterX());
+        edge.setStartX(fromCell.getCenterX());
         edge.setStartY(fromCell.getCenterY());
-        System.out.println("StartY: " + fromCell.getCenterY());
 
         edge.setEndX(toCell.getCenterX());
         edge.setEndY(toCell.getCenterY());
-        */
 
-        //boundsInScene = edge.localToScene(edge.getBoundsInLocal());
+        boundsInScene = edge.localToScene(edge.getBoundsInLocal());
     }
 
     public int getFrom() {
@@ -42,6 +45,10 @@ public class Route {
 
     public int getTo() {
         return to;
+    }
+
+    public Line getEdge() {
+        return edge;
     }
 
     @Override

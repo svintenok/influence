@@ -19,13 +19,7 @@ public class GameMap {
     public final static int cellsMaxCount = 121;
 
 
-
-    public GameMap(List<Cell> cells, List<Route> routes) {
-        this.cells = cells;
-        this.routes = routes;
-    }
-
-    public static GameMap createGameMap(byte[] cellsBytes, byte[] routesBytes){
+    public GameMap(byte[] cellsBytes, byte[] routesBytes){
 
         int[] yCoordinatesMap = new int[cellsMaxCount + 1];
         int[] xCoordinatesMap = new int[cellsMaxCount + 1];
@@ -42,19 +36,17 @@ public class GameMap {
         }
 
         //Cells creating
-        List<Cell> cells = new ArrayList<>();
+        this.cells = new ArrayList<>();
         for (int i = 0; i < cellsBytes.length; i++){
             if (cellsBytes[i] != 0)
                 cells.add(new Cell(i+1, cellsBytes[i], yCoordinatesMap[i+1], xCoordinatesMap[i+1]));
         }
 
         //Routes creating
-        List<Route> routes = new ArrayList<>();
+        this.routes = new ArrayList<>();
         for (int i = 0; i < routesBytes.length-1; i+=2){
-            routes.add(new Route(routesBytes[i], routesBytes[i+1]));
+            routes.add(new Route(getCell(routesBytes[i]), getCell(routesBytes[i+1])));
         }
-
-        return new GameMap(cells, routes);
     }
 
 
@@ -74,8 +66,7 @@ public class GameMap {
             System.out.println();
         }
         System.out.println("--------------------------");
-
-
+        System.out.println(routes);
     }
 
     public void printCell(int cellNum, String view){

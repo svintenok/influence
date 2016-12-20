@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import ru.kpfu.itis.group11501.influence.client.Connection;
 import ru.kpfu.itis.group11501.influence.client.helpers.*;
@@ -14,7 +14,6 @@ import ru.kpfu.itis.group11501.influence.client.models.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 /**
@@ -115,13 +114,21 @@ public class GameController implements Initializable {
             System.out.print(routes[i]  + " ");
         System.out.println();
 
-        gameMap = GameMap.createGameMap(cells, routes);
+        gameMap = new GameMap(cells, routes);
 
         //logs
         gameMap.printGameMap();
 
         for (Cell cell : gameMap.getCells())
             gameFieldPane.getChildren().add(cell.getCellPane());
+
+        System.out.println(gameMap.getRoutes().size());
+        for (Route route : gameMap.getRoutes()) {
+            Line edge = route.getEdge();
+            gameFieldPane.getChildren().add(edge);
+            edge.toBack();
+        }
+
     }
 
     @Override

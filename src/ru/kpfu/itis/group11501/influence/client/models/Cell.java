@@ -21,12 +21,6 @@ public class Cell {
     private int power;
     private int maxPower;
 
-    public final int maxX = 14;
-    public final int maxY = 9;
-
-    private static final double PADDING_X = 51.0;
-    private static final double PADDING_Y = 61.0;
-
     private static final double SHIFT_X = 50;
     private static final double SHIFT_Y = 44;
 
@@ -97,13 +91,11 @@ public class Cell {
 
     public double getCenterX() {
         Bounds boundsInScene = cellPane.localToScene(cellPane.getBoundsInLocal());
-        System.out.println("MinX: " + boundsInScene.getMinX());
-        return boundsInScene.getMinX() + boundsInScene.getWidth() / 2 - PADDING_X;
+        return boundsInScene.getMinX() + boundsInScene.getWidth() / 2;
     }
 
     public double getCenterY () {
         Bounds boundsInScene = cellPane.localToScene(cellPane.getBoundsInLocal());
-        System.out.println("MinY: " + boundsInScene.getMinY());
-        return boundsInScene.getMinY() + boundsInScene.getHeight() / 2 - PADDING_Y;
+        return boundsInScene.getMinY() + boundsInScene.getHeight() / 2 + 4;
     }
 }
