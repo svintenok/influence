@@ -8,7 +8,7 @@
 
 <Pane prefHeight="50.0" prefWidth="50.0" scaleX="1.0" scaleY="1.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <children>
-    <Polygon fill="DARKGREY" layoutX="25.0" layoutY="25.0" scaleX="1.0" scaleY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+    <Polygon fill="GREY" layoutX="25.0" layoutY="25.0" scaleX="0.9" scaleY="0.9" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
       <points>
         <Double fx:value="7.5" />
         <Double fx:value="-12.5" />
@@ -24,7 +24,7 @@
         <Double fx:value="-12.5" />
       </points>
     </Polygon>
-    <Polygon fill="#1e90ff00" layoutX="25.0" layoutY="25.0" opacity="0.5" scaleX="1.0" scaleY="1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" translateX="0.0" translateY="0.0">
+    <Polygon fill="TRANSPARENT" layoutX="25.0" layoutY="25.0" scaleX="1.0" scaleY="1.0" stroke="#363636" strokeType="INSIDE" strokeWidth="2.0" translateX="0.0" translateY="0.0">
       <points>
         <Double fx:value="11.25" />
         <Double fx:value="-18.75" />

@@ -35,9 +35,11 @@ public class Cell {
 
         try {
             cellPane = FXMLLoader.load(getClass().getResource(CELL_FXML));
-            setColor(Color.GRAY);
-            cellPane.getChildren().get(0).setScaleX(0.9);
-            cellPane.getChildren().get(0).setScaleY(0.9);
+
+            double scale = maxPower == 8? 1.0 : 1.1;
+
+            cellPane.getChildren().get(1).setScaleX(scale);
+            cellPane.getChildren().get(1).setScaleY(scale);
 
             cellPane.setLayoutY((y-1)*SHIFT_Y);
             if (y % 2 == 0)
@@ -91,11 +93,11 @@ public class Cell {
 
     public double getCenterX() {
         Bounds boundsInScene = cellPane.localToScene(cellPane.getBoundsInLocal());
-        return boundsInScene.getMinX() + boundsInScene.getWidth() / 2;
+        return boundsInScene.getMinX() + boundsInScene.getWidth() / 2 + 1.2;
     }
 
     public double getCenterY () {
         Bounds boundsInScene = cellPane.localToScene(cellPane.getBoundsInLocal());
-        return boundsInScene.getMinY() + boundsInScene.getHeight() / 2 + 4;
+        return boundsInScene.getMinY() + boundsInScene.getHeight() / 2 + 3.2;
     }
 }

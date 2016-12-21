@@ -21,7 +21,7 @@ public class GraphGenerator {
     public final int cellsCount = 77;
     public final int cellsMaxCount = 121;
     public final double bigCellsPercent = 0.15;
-    public final double routesAddingPercent = 0.86;
+    public final double routesAddingPercent = 0.68;
 
     private Map<Integer, Cell> cellsMap;
     private Map<Integer, Set<Integer>> routesMap;

@@ -27,8 +27,7 @@ public class Route {
         edge = new Line();
 
         edge.setStrokeWidth(2);
-        edge.setStroke(Color.valueOf("DARKGRAY"));
-        edge.setOpacity(0.5);
+        edge.setStroke(Color.valueOf("#363636"));
 
         edge.setStartX(fromCell.getCenterX());
         edge.setStartY(fromCell.getCenterY());

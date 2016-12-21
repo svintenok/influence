@@ -119,10 +119,12 @@ public class GameController implements Initializable {
         //logs
         gameMap.printGameMap();
 
+
+        //cells printing
         for (Cell cell : gameMap.getCells())
             gameFieldPane.getChildren().add(cell.getCellPane());
 
-        System.out.println(gameMap.getRoutes().size());
+        //routes printing
         for (Route route : gameMap.getRoutes()) {
             Line edge = route.getEdge();
             gameFieldPane.getChildren().add(edge);
