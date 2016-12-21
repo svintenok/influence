@@ -61,6 +61,10 @@ public class Cell {
 
     public void setType(int type) {
         this.type = type;
+        if (type == 1)
+            setColor(Color.valueOf("#3A5FCD"));
+        else
+            setColor(Color.valueOf("#2E8B57"));
     }
 
     public int getPower() {
@@ -68,7 +72,14 @@ public class Cell {
     }
 
     public void setPower(int power) {
+
         this.power = power;
+        setValue(power);
+
+        double scaleX = cellPane.getChildren().get(0).getScaleX();
+        cellPane.getChildren().get(0).setScaleX(scaleX + 0.025);
+        cellPane.getChildren().get(0).setScaleY(scaleX + 0.025);
+
     }
 
     public int getMaxPower() {

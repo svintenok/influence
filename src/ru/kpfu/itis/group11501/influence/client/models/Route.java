@@ -1,9 +1,8 @@
 package ru.kpfu.itis.group11501.influence.client.models;
 
-import javafx.geometry.Bounds;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.scene.paint.*;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 
 
 /**
@@ -18,7 +17,7 @@ public class Route {
     private int to;
 
     private Line edge;
-    private Bounds boundsInScene;
+
 
     public Route(Cell fromCell, Cell  toCell) {
         this.from = fromCell.getNumber();
@@ -27,15 +26,14 @@ public class Route {
         edge = new Line();
 
         edge.setStrokeWidth(2);
-        edge.setStroke(Color.valueOf("#363636"));
+        edge.setStroke(Color.valueOf("#4F4F4F"));
+        edge.setOpacity(0.7);
 
         edge.setStartX(fromCell.getCenterX());
         edge.setStartY(fromCell.getCenterY());
 
         edge.setEndX(toCell.getCenterX());
         edge.setEndY(toCell.getCenterY());
-
-        boundsInScene = edge.localToScene(edge.getBoundsInLocal());
     }
 
     public int getFrom() {
@@ -56,19 +54,22 @@ public class Route {
     }
 
 
-    public double getStartX() {
-        return boundsInScene.getMinX();
-    }
+    public void setGradient(Cell fromCell, Cell toCell) {
 
-    public double getStartY() {
-        return boundsInScene.getMinY();
-    }
+        Color color1 = (Color) ((Polygon)fromCell.getCellPane().getChildren().get(0)).getFill();
+        Color color2 = (Color) ((Polygon)toCell.getCellPane().getChildren().get(0)).getFill();
 
-    public double getEndX() {
-        return boundsInScene.getMaxX();
-    }
+        LinearGradient edgeColor = new LinearGradient(
+                edge.getStartX(),
+                edge.getStartY(),
+                edge.getEndX(),
+                edge.getEndY(),
+                false,
+                CycleMethod.NO_CYCLE,
+                new Stop(0, color1),
+                new Stop(1, color2)
+        );
 
-    public double getEndY() {
-        return boundsInScene.getMaxY();
+        edge.setStroke(edgeColor);
     }
 }

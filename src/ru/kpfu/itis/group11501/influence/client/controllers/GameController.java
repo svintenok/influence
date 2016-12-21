@@ -115,6 +115,7 @@ public class GameController implements Initializable {
         System.out.println();
 
         gameMap = new GameMap(cells, routes);
+        gameMap.setOrderNumber(Connection.getBufferedInputStream().read());
 
         //logs
         gameMap.printGameMap();
@@ -133,6 +134,14 @@ public class GameController implements Initializable {
 
     }
 
+    private void readStaringCells() throws IOException {
+        Cell cell = gameMap.getCell(Connection.getBufferedInputStream().read());
+        gameMap.changeCell(cell, 1, 2);
+
+        cell = gameMap.getCell(Connection.getBufferedInputStream().read());
+        gameMap.changeCell(cell, 2, 3);;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("GameController initialized.");
@@ -142,6 +151,7 @@ public class GameController implements Initializable {
         if (gameMap == null) {
             try {
                 readMap();
+                readStaringCells();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -13,6 +13,7 @@ public class GameMap {
 
     private List<Cell> cells;
     private List<Route> routes;
+    private int orderNumber;
 
     public final static int maxX = 14;
     public final static int maxY = 9;
@@ -133,5 +134,29 @@ public class GameMap {
 
     public List<Route> getRoutes() {
         return routes;
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public void changeCell(Cell cell, int type, int power) {
+        cell.setPower(power);
+        cell.setType(type);
+        for (Route route : getRoutes(cell))
+            route.setGradient(getCell(route.getFrom()), getCell(route.getTo()));
+    }
+
+    private List<Route> getRoutes(Cell cell){
+
+        List<Route> routesFromCell = new ArrayList<>();
+        for (Route route : routes)
+            if (route.getFrom() == cell.getNumber() || route.getTo() == cell.getNumber())
+                routesFromCell.add(route);
+        return routesFromCell;
     }
 }

@@ -24,7 +24,7 @@
         <Double fx:value="-12.5" />
       </points>
     </Polygon>
-    <Polygon fill="TRANSPARENT" layoutX="25.0" layoutY="25.0" scaleX="1.0" scaleY="1.0" stroke="#363636" strokeType="INSIDE" strokeWidth="2.0" translateX="0.0" translateY="0.0">
+    <Polygon fill="TRANSPARENT" layoutX="25.0" layoutY="25.0" opacity="0.7" scaleX="1.0" scaleY="1.0" stroke="#4F4F4F" strokeType="INSIDE" strokeWidth="2.0" translateX="0.0" translateY="0.0">
       <points>
         <Double fx:value="11.25" />
         <Double fx:value="-18.75" />

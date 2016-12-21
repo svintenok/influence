@@ -15,39 +15,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Author: Svintenok Kate
+ * Author: Svintenok Kate and Konstantin Menshenin
  * Date: 03.12.2016
  * Group: 11-501
  * Project: influence
  */
 public class Influence extends Application {
 
-    //private static final int PORT = 3456;
-    //private static final String HOST = "localhost";
     private static final String MENU_FXML = "fxml/main_menu.fxml";
-    //private BufferedInputStream bufferedInputStream;
-    //private BufferedOutputStream bufferedOutputStream;
     //private Scanner scanner;
-    //private GameMap gameMap;
     //private int orderNumber;
-
     //private Random random;
 
-   /* public Influence() {
-
-        this.random = new Random();
-
-        try {
-            Socket s = new Socket(HOST, PORT);
-            this.bufferedInputStream = new BufferedInputStream(s.getInputStream());
-            this.bufferedOutputStream = new BufferedOutputStream(s.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        this.scanner = new Scanner(System.in);
-    }
-*/
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource(MENU_FXML));
@@ -183,27 +162,6 @@ public class Influence extends Application {
         gameMap.printGameMap("power");
     }
 
-    private void readMap() throws IOException {
-        byte[] cells = new byte[bufferedInputStream.read()];
-        bufferedInputStream.read(cells);
-
-        for (int i = 0; i < cells.length; i++)
-            System.out.print(cells[i]  + " ");
-        System.out.println();
-
-        byte[] routesArraySize = new byte[2];
-        bufferedInputStream.read(routesArraySize);
-        byte[] routes = new byte[new BigInteger(routesArraySize).intValue()];
-
-        bufferedInputStream.read(routes);
-        for (int i = 0; i < routes.length; i++)
-            System.out.print(routes[i]  + " ");
-        System.out.println();
-
-        gameMap = GameMap.createGameMap(cells, routes);
-        gameMap.printGameMap();
-    }
-
     private void readStartingCells() throws IOException {
         Cell cell = gameMap.getCell(bufferedInputStream.read());
         cell.setType(1);
@@ -214,12 +172,10 @@ public class Influence extends Application {
 
         gameMap.printGameMap();
     }
-
 */
 
     public static void main(String[] args) throws IOException{
         launch(args);
-        //(new Influence()).startInfluence();
     }
 
 }
