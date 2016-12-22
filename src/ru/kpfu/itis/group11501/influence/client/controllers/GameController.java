@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -140,6 +141,10 @@ public class GameController implements Initializable {
 
         cell = gameMap.getCell(Connection.getBufferedInputStream().read());
         gameMap.changeCell(cell, 2, 3);;
+    }
+
+    public void endMove(MouseEvent mouseEvent) {
+        System.out.println(1);
     }
 
     @Override
