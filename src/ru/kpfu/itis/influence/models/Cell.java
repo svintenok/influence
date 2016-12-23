@@ -1,13 +1,23 @@
 package ru.kpfu.itis.influence.models;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.FillTransition;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+import ru.kpfu.itis.influence.helpers.FloatingPoint;
 
 import java.io.IOException;
 
@@ -42,6 +52,9 @@ public class Cell {
                     double scaleX = cell.getChildren().get(0).getScaleX();
                     cell.getChildren().get(0).setScaleX(scaleX + 0.025);
                     cell.getChildren().get(0).setScaleY(scaleX + 0.025);
+
+                    FloatingPoint.floatIt(cell);
+
                 }
             });
 

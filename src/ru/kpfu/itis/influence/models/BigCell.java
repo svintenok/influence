@@ -2,6 +2,7 @@ package ru.kpfu.itis.influence.models;
 
 import javafx.scene.control.Label;
 import javafx.scene.shape.Polygon;
+import ru.kpfu.itis.influence.helpers.FloatingPoint;
 
 /**
  * Created by cmen on 09/12/16.
@@ -29,6 +30,8 @@ public class BigCell extends Cell{
                 double scaleX = this.getPaneForm().getChildren().get(0).getScaleX();
                 this.getPaneForm().getChildren().get(0).setScaleX(scaleX + 0.009);
                 this.getPaneForm().getChildren().get(0).setScaleY(scaleX + 0.009);
+
+                FloatingPoint.floatIt(this.getPaneForm());
             }
         });
 

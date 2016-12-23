@@ -10,8 +10,8 @@ public class Edge {
 
     private Line edge;
 
-    private static final double PADDING_X = 51;
-    private static final double PADDING_Y = 61;
+    private static final double PADDING_X = 0;//51;
+    private static final double PADDING_Y = 0;//61;
 
     private Bounds boundsInScene;
 
