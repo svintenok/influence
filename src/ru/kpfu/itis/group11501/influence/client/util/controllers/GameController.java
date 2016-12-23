@@ -15,6 +15,7 @@ import ru.kpfu.itis.group11501.influence.client.models.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
@@ -68,6 +69,7 @@ public class GameController implements Initializable {
     private static GameMap gameMap;
     private int pointsQuantity;
     private Cell selectedCell;
+    private Random random;
 
     /*
     public void notification(ActionEvent actionEvent) {
@@ -219,15 +221,40 @@ public class GameController implements Initializable {
 
                 else if (selectedCell.getPower() > 1 && gameMap.isConnected(selectedCell, cell)) {
 
-                    if (cell.getType() == 0){
-                        cell.setType(gameMap.getOrderNumber());
-                        cell.setPower(selectedCell.getPower() - 1);
+                    Cell toCell = cell;
+                    toCell.selecting();
+
+                    if (toCell.getType() == 0){
+                        toCell.setType(gameMap.getOrderNumber());
+                        toCell.setPower(selectedCell.getPower() - 1);
                         selectedCell.setPower(1);
-                        selectedCell.deleteSelecting();
-                        cell.selecting();
                     }
+
                     else {
-                        //ToDo!
+                        int selectedCellPower = selectedCell.getPower();
+                        int toCellPower = toCell.getPower();
+
+                        if (Math.abs(selectedCellPower - toCellPower) >= 2) {
+                            toCell.setPower(Math.abs(selectedCellPower - toCellPower) <= toCell.getMaxPower() ? Math.abs(selectedCellPower - toCellPower) : toCell.getMaxPower());
+                            selectedCell.setPower(1);
+                            if (selectedCellPower > toCellPower) {
+                                toCell.setType(gameMap.getOrderNumber());
+                                if (toCell.getMaxPower() < Math.abs(selectedCellPower - toCellPower))
+                                    selectedCell.setPower((toCell.getMaxPower() - (selectedCellPower - toCellPower)));
+                            }
+
+                        } else {
+                            selectedCell.setPower(1);
+                            toCell.setPower(1);
+                            if (selectedCellPower == toCellPower)
+                                if (random.nextDouble() > 0.5)
+                                    toCell.setPower(gameMap.getOrderNumber());
+                                else if (selectedCellPower > toCellPower)
+                                    if (random.nextDouble() > 0.25)
+                                        toCell.setPower(gameMap.getOrderNumber());
+                                    else if (random.nextDouble() > 0.75)
+                                        toCell.setPower(gameMap.getOrderNumber());
+                        }
                     }
 
                     //sending move
@@ -237,22 +264,22 @@ public class GameController implements Initializable {
                     Connection.getBufferedOutputStream().write(new byte[]{
                             (byte) selectedCell.getNumber(),
                             (byte) selectedCell.getPower(),
-                            (byte) cell.getNumber(),
-                            (byte) cell.getPower(),
-                            (byte) cell.getType(),
+                            (byte) toCell.getNumber(),
+                            (byte) toCell.getPower(),
+                            (byte) toCell.getType(),
                             });
 
                     Connection.getBufferedOutputStream().flush();
 
 
                     selectedCell.deleteSelecting();
-                    if (cell.getType() == gameMap.getOrderNumber()){
-                        selectedCell = cell;
-                        cell.selecting();
-                        if (cell.getPower() == 1)
+                    if (toCell.getType() == gameMap.getOrderNumber()){
+                        selectedCell = toCell;
+                        if (toCell.getPower() == 1)
                             gameButtonText.setText("Select a cell with 2+ power");
                     }
                     else
+                        toCell.deleteSelecting();
                         gameButtonText.setText("Touch a cell of your color");
                 }
             }
@@ -308,6 +335,7 @@ public class GameController implements Initializable {
             e.printStackTrace();
         }
 
+        random =  new Random();
         new MovesRecipient(gameMap, gameButtonText);
     }
 
