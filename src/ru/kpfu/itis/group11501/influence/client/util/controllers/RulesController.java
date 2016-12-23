@@ -1,11 +1,11 @@
-package ru.kpfu.itis.group11501.influence.client.controllers;
+package ru.kpfu.itis.group11501.influence.client.util.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import ru.kpfu.itis.group11501.influence.client.helpers.*;
+import ru.kpfu.itis.group11501.influence.client.util.helpers.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 public class RulesController implements Initializable {
 
     // FXML Resources
-    private static final String MENU_FXML = "../fxml/main_menu.fxml";
+    private static final String MENU_FXML = "../../fxml/main_menu.fxml";
 
     @FXML
     private Pane rulesPane;

@@ -1,20 +1,15 @@
-package ru.kpfu.itis.group11501.influence.client.controllers;
+package ru.kpfu.itis.group11501.influence.client.util.controllers;
 
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-import ru.kpfu.itis.group11501.influence.client.Connection;
-import ru.kpfu.itis.group11501.influence.client.MovesRecipient;
-import ru.kpfu.itis.group11501.influence.client.helpers.*;
+import ru.kpfu.itis.group11501.influence.client.util.Connection;
+import ru.kpfu.itis.group11501.influence.client.util.MovesRecipient;
 import ru.kpfu.itis.group11501.influence.client.models.*;
 
 import java.io.IOException;

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="lose-window" prefHeight="150.0" prefWidth="300.0" stylesheets="@../resources/css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.group11501.influence.client.controllers.GameController">
+<AnchorPane id="lose-window" prefHeight="150.0" prefWidth="300.0" stylesheets="@../resources/css/style.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.group11501.influence.client.util.controllers.GameController">
   <children>
     <Label id="lose-label" alignment="CENTER" layoutX="50.0" layoutY="25.0" prefHeight="50.0" prefWidth="200.0" text="You lose." textAlignment="CENTER">
       <font>

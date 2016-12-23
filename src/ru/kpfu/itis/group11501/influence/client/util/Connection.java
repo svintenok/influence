@@ -1,4 +1,4 @@
-package ru.kpfu.itis.group11501.influence.client;
+package ru.kpfu.itis.group11501.influence.client.util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

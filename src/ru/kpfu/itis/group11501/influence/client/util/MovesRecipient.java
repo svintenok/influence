@@ -1,10 +1,11 @@
-package ru.kpfu.itis.group11501.influence.client;
+package ru.kpfu.itis.group11501.influence.client.util;
 
 import javafx.application.Platform;
 import javafx.scene.text.Text;
 import ru.kpfu.itis.group11501.influence.client.models.Cell;
 import ru.kpfu.itis.group11501.influence.client.models.GameMap;
 import ru.kpfu.itis.group11501.influence.client.models.Status;
+import ru.kpfu.itis.group11501.influence.client.util.Connection;
 
 import java.io.IOException;
 
