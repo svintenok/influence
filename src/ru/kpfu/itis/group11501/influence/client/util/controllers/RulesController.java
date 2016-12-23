@@ -11,7 +11,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cmen on 07/12/16.
+ * Author: Svintenok Kate and Menshenin Konstantin
+ * Date: 07.12.2016
+ * Group: 11-501
+ * Project: influence
  */
 public class RulesController implements Initializable {
 

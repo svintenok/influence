@@ -12,7 +12,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 /**
- * Author: Svintenok Kate and Konstantin Menshenin
+ * Author: Svintenok Kate and Menshenin Konstantin
  * Date: 19.12.2016
  * Group: 11-501
  * Project: influence

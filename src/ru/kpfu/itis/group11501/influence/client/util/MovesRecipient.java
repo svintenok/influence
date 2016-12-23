@@ -5,7 +5,6 @@ import javafx.scene.text.Text;
 import ru.kpfu.itis.group11501.influence.client.models.Cell;
 import ru.kpfu.itis.group11501.influence.client.models.GameMap;
 import ru.kpfu.itis.group11501.influence.client.models.Status;
-import ru.kpfu.itis.group11501.influence.client.util.Connection;
 
 import java.io.IOException;
 
@@ -20,7 +19,7 @@ public class MovesRecipient implements Runnable {
     private GameMap gameMap;
     private Text gameButtonText;
 
-    public MovesRecipient(GameMap gameMap, Status status, Text gameButtonText) {
+    public MovesRecipient(GameMap gameMap, Text gameButtonText) {
         this.gameMap = gameMap;
         this.gameButtonText = gameButtonText;
         thread = new Thread(this);
@@ -39,31 +38,48 @@ public class MovesRecipient implements Runnable {
                     cell.setPower(cell.getPower() + 1);
                 }
                 */
-                    Cell cell = gameMap.getCell(Connection.getBufferedInputStream().read());
-                    do {
+                    while (Connection.getBufferedInputStream().read() != 0){
+                        byte[] moveBytes = new byte[5];
+                        Connection.getBufferedInputStream().read(moveBytes);
 
-                        Cell finalCell = cell;
+                        Cell fromCell = gameMap.getCell(moveBytes[0]);
+                        Cell toCell = gameMap.getCell(moveBytes[2]);
+
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                finalCell.setPower(finalCell.getPower() + 1);
+                                fromCell.selecting();
+                                toCell.selecting();
+                                toCell.setPower(moveBytes[3]);
+                                toCell.setType(moveBytes[4]);
+                                fromCell.setPower(moveBytes[1]);
+                                fromCell.deleteSelecting();
+                                toCell.deleteSelecting();
                             }
                         });
-                        cell = gameMap.getCell(Connection.getBufferedInputStream().read());
+                    }
 
-                    } while (cell != null);
+                    int count = Connection.getBufferedInputStream().read();
 
+                    for (int i = 0; i < count; i ++){
+                        Cell cell = gameMap.getCell(Connection.getBufferedInputStream().read());
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                cell.setPower(cell.getPower() + 1);
+                            }
+                        });
+                    }
 
                 } catch(IOException e){
                     e.printStackTrace();
                 }
 
-                gameMap.setStatus(Status.POWERS_DISTRIBUTION);
-                int pointsQuantity = gameMap.getCellsCountByType(gameMap.getOrderNumber());
+                gameMap.setStatus(Status.CAPTURE);
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        gameButtonText.setText("Power up your cells (" + pointsQuantity + ")");
+                        gameButtonText.setText("Touch a nearby cell to attack");
                     }
                 });
             }

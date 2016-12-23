@@ -10,7 +10,7 @@ import javafx.scene.shape.Polygon;
 import java.io.IOException;
 
 /**
- * Author: Svintenok Kate and Konstantin Menshenin
+ * Author: Svintenok Kate and Menshenin Konstantin
  * Date: 11.12.2016
  * Group: 11-501
  * Project: influence
@@ -73,9 +73,7 @@ public class Cell {
 
     public void setPower(int power) {
 
-        double scaleX = cellPane.getChildren().get(0).getScaleX();
-        cellPane.getChildren().get(0).setScaleX(scaleX + (power - this.power) * 0.025);
-        cellPane.getChildren().get(0).setScaleY(scaleX + (power - this.power) * 0.025);
+        setScale((power - this.power) * 0.025);
 
         this.power = power;
         setValue(power);
@@ -111,7 +109,30 @@ public class Cell {
         return boundsInScene.getMinY() + boundsInScene.getHeight() / 2 + 3.2;
     }
 
-    public void setListener() {
 
+    public void selecting() {
+        if (type == 1)
+            setColor(Color.valueOf("#6F89D8"));
+        else
+            setColor(Color.valueOf("#57B27F"));
+
+        setScale(0.025);
     }
+
+
+    public void deleteSelecting() {
+        if (type == 1)
+            setColor(Color.valueOf("#3A5FCD"));
+        else
+            setColor(Color.valueOf("#2E8B57"));
+
+        setScale(-0.025);
+    }
+
+    private void setScale(double scaleDifference){
+        double scale = cellPane.getChildren().get(0).getScaleX();
+        cellPane.getChildren().get(0).setScaleX(scale + scaleDifference);
+        cellPane.getChildren().get(0).setScaleY(scale + scaleDifference);
+    }
+
 }

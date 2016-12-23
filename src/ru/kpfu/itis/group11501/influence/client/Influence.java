@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ru.kpfu.itis.group11501.influence.client.models.*;
 
 
 import java.io.*;
@@ -15,7 +14,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * Author: Svintenok Kate and Konstantin Menshenin
+ * Author: Svintenok Kate and Menshenin Konstantin
  * Date: 03.12.2016
  * Group: 11-501
  * Project: influence
@@ -23,9 +22,6 @@ import java.util.Scanner;
 public class Influence extends Application {
 
     private static final String MENU_FXML = "fxml/main_menu.fxml";
-    //private Scanner scanner;
-    //private int orderNumber;
-    //private Random random;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -37,25 +33,7 @@ public class Influence extends Application {
         primaryStage.show();
     }
 
-  /*  public void startInfluence() throws IOException {
-        readMap();
-        orderNumber = bufferedInputStream.read();
-        readStartingCells();
-
-        if (orderNumber == 1){
-            move();
-            givePowers();
-        }
-
-
-        while (true) {
-            getEnemyMove();
-            move();
-            givePowers();
-        }
-
-    }
-
+  /*
     private void move() throws IOException {
         gameMap.printGameMap("number");
         System.out.println("Ваш ход");
@@ -160,17 +138,6 @@ public class Influence extends Application {
             }
         }
         gameMap.printGameMap("power");
-    }
-
-    private void readStartingCells() throws IOException {
-        Cell cell = gameMap.getCell(bufferedInputStream.read());
-        cell.setType(1);
-        cell.setPower(2);
-        cell = gameMap.getCell(bufferedInputStream.read());
-        cell.setType(2);
-        cell.setPower(3);
-
-        gameMap.printGameMap();
     }
 */
 

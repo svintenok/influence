@@ -18,7 +18,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by cmen on 07/12/16.
+ * Author: Svintenok Kate and Menshenin Konstantin
+ * Date: 07.12.2016
+ * Group: 11-501
+ * Project: influence
  */
 public class GameController implements Initializable {
 
@@ -63,9 +66,8 @@ public class GameController implements Initializable {
 
 
     private static GameMap gameMap;
-    private Status status;
-    private MovesRecipient movesRecipient;
     private int pointsQuantity;
+    private Cell selectedCell;
 
     /*
     public void notification(ActionEvent actionEvent) {
@@ -137,7 +139,11 @@ public class GameController implements Initializable {
             cell.getCellPane().getChildren().get(2).setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    cellsHandler(cell);
+                    try {
+                        cellsHandler(cell);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }
@@ -157,12 +163,13 @@ public class GameController implements Initializable {
         gameMap.changeCell(cell, 1, 2);
 
         cell = gameMap.getCell(Connection.getBufferedInputStream().read());
-        gameMap.changeCell(cell, 2, 3);;
+        gameMap.changeCell(cell, 2, 3);
     }
 
 
-    private void cellsHandler(Cell cell) {
-        System.out.println(gameMap.getStatus());
+    private void cellsHandler(Cell cell) throws IOException {
+
+
         if (gameMap.getStatus() == Status.POWERS_DISTRIBUTION) {
             if (cell.getType() == gameMap.getOrderNumber() && cell.getPower() < cell.getMaxPower()) {
                 if (pointsQuantity > 0) {
@@ -178,8 +185,75 @@ public class GameController implements Initializable {
                         e.printStackTrace();
                     }
 
-                    if (pointsQuantity == 0)
-                        gameButtonText.setText("Click here to end turn");
+                    if (pointsQuantity == 0){
+                        gameMap.setStatus(Status.WAITING);
+                        gameButtonText.setText("Wait for you move");
+                    }
+                }
+            }
+        }
+
+        else if (gameMap.getStatus() == Status.CAPTURE) {
+            if (selectedCell == null) {
+                if (cell.getType() == gameMap.getOrderNumber()) {
+                    cell.selecting();
+                    selectedCell = cell;
+
+                    if (cell.getPower() == 1)
+                        gameButtonText.setText("Select a cell with 2+ power");
+                    else
+                        gameButtonText.setText("Touch a nearby cell to attack");
+                }
+            }
+            else {
+                if (cell.getType() == gameMap.getOrderNumber()) {
+                    selectedCell.deleteSelecting();
+                    selectedCell = cell;
+                    cell.selecting();
+
+                    if (cell.getPower() == 1)
+                        gameButtonText.setText("Select a cell with 2+ power");
+                    else
+                        gameButtonText.setText("Touch a nearby cell to attack");
+                }
+
+                else if (selectedCell.getPower() > 1 && gameMap.isConnected(selectedCell, cell)) {
+
+                    if (cell.getType() == 0){
+                        cell.setType(gameMap.getOrderNumber());
+                        cell.setPower(selectedCell.getPower() - 1);
+                        selectedCell.setPower(1);
+                        selectedCell.deleteSelecting();
+                        cell.selecting();
+                    }
+                    else {
+                        //ToDo!
+                    }
+
+                    //sending move
+                    Connection.getBufferedOutputStream().write(1);
+                    Connection.getBufferedOutputStream().flush();
+
+                    Connection.getBufferedOutputStream().write(new byte[]{
+                            (byte) selectedCell.getNumber(),
+                            (byte) selectedCell.getPower(),
+                            (byte) cell.getNumber(),
+                            (byte) cell.getPower(),
+                            (byte) cell.getType(),
+                            });
+
+                    Connection.getBufferedOutputStream().flush();
+
+
+                    selectedCell.deleteSelecting();
+                    if (cell.getType() == gameMap.getOrderNumber()){
+                        selectedCell = cell;
+                        cell.selecting();
+                        if (cell.getPower() == 1)
+                            gameButtonText.setText("Select a cell with 2+ power");
+                    }
+                    else
+                        gameButtonText.setText("Touch a cell of your color");
                 }
             }
         }
@@ -187,15 +261,20 @@ public class GameController implements Initializable {
 
     public void changeStatus(MouseEvent mouseEvent) {
 
-        System.out.println(gameMap.getStatus());
 
-        if (gameMap.getStatus() == Status.POWERS_DISTRIBUTION) {
-            gameMap.setStatus(status.WAITING);
-            gameButtonText.setText("Wait for you move");
+        if (gameMap.getStatus() == Status.CAPTURE){
+            if (selectedCell != null){
+                selectedCell.deleteSelecting();
+                selectedCell = null;
+            }
+            gameMap.setStatus(Status.POWERS_DISTRIBUTION);
             pointsQuantity = gameMap.getCellsCountByType(gameMap.getOrderNumber());
+            gameButtonText.setText("Power up your cells (" + pointsQuantity + ")");
 
             try {
                 Connection.getBufferedOutputStream().write(0);
+                Connection.getBufferedOutputStream().flush();
+                Connection.getBufferedOutputStream().write(pointsQuantity);
                 Connection.getBufferedOutputStream().flush();
 
             } catch (IOException e) {
@@ -217,11 +296,11 @@ public class GameController implements Initializable {
             pointsQuantity = gameMap.getCellsCountByType(gameMap.getOrderNumber());
 
             if (gameMap.getOrderNumber() == 1) {
-                gameMap.setStatus(status.POWERS_DISTRIBUTION);
-                gameButtonText.setText("Power up your cells (" + pointsQuantity + ")");
+                gameMap.setStatus(Status.CAPTURE);
+                gameButtonText.setText("Touch a cell of your color");
             }
             else {
-                gameMap.setStatus(status.WAITING);
+                gameMap.setStatus(Status.WAITING);
                 gameButtonText.setText("Wait for you move");
             }
 
@@ -229,7 +308,7 @@ public class GameController implements Initializable {
             e.printStackTrace();
         }
 
-        movesRecipient = new MovesRecipient(gameMap, status, gameButtonText);
+        new MovesRecipient(gameMap, gameButtonText);
     }
 
 }

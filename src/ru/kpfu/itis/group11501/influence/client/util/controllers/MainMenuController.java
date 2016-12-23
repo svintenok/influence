@@ -11,6 +11,12 @@ import ru.kpfu.itis.group11501.influence.client.util.helpers.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Author: Svintenok Kate and Menshenin Konstantin
+ * Date: 07.12.2016
+ * Group: 11-501
+ * Project: influence
+ */
 public class MainMenuController implements Initializable {
 
     // FXML Resources

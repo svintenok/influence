@@ -6,7 +6,7 @@ import javafx.scene.shape.Polygon;
 
 
 /**
- * Author: Svintenok Kate and Konstantin Menshenin
+ * Author: Svintenok Kate and Menshenin Konstantin
  * Date: 11.12.2016
  * Group: 11-501
  * Project: influence
