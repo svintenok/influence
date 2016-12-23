@@ -14,6 +14,7 @@ public class GameMap {
     private List<Cell> cells;
     private List<Route> routes;
     private int orderNumber;
+    private Status status;
 
     public final static int maxX = 14;
     public final static int maxY = 9;
@@ -158,5 +159,13 @@ public class GameMap {
             if (route.getFrom() == cell.getNumber() || route.getTo() == cell.getNumber())
                 routesFromCell.add(route);
         return routesFromCell;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status){
+        this.status = status;
     }
 }

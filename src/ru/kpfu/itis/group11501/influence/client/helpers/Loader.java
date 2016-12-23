@@ -1,5 +1,6 @@
 package ru.kpfu.itis.group11501.influence.client.helpers;
 
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,10 +22,12 @@ public class Loader {
     public static void goTo(String resource, Pane pane){
         try {
             Stage stage = (Stage) pane.getScene().getWindow();
-            Parent root = javafx.fxml.FXMLLoader.load(Loader.class.getResource(resource));
+            FXMLLoader fxmlLoader = new FXMLLoader(Loader.class.getResource(resource));
+            Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -12,18 +12,19 @@
   <children>
     <AnchorPane id="game-field" fx:id="gameFieldPane" layoutX="51.0" layoutY="63.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="700.0" />
     <!-- <Button id="button-red" fx:id="btnGamePlay" layoutX="200.0" layoutY="506.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="400.0" text="Button" /> -->
-    <Button id="button-surrender" fx:id="btnSurrender" layoutX="700.0" layoutY="14.0" mnemonicParsing="false" onAction="#notification" prefHeight="36.0" prefWidth="36.0" />
+    <!-- <Button id="button-surrender" fx:id="btnSurrender" layoutX="700.0" layoutY="14.0" mnemonicParsing="false" onAction="#notification" prefHeight="36.0" prefWidth="36.0" />-->
     <!-- <Rectangle layoutX="0.0" layoutY="0.0" fill="#3A5FCD" height="10.0" width="800.0" />-->
     <Rectangle fill="#2E8B57" height="15.0" layoutX="0.0" layoutY="500.0" width="800.0" />
     <Rectangle fill="#3A5FCD" height="15.0" layoutX="0.0" layoutY="500.0" width="500.0" />
     <Rectangle fill="#3A5FCD" height="15.0" layoutX="0.0" layoutY="585.0" width="800.0" />
-    <Pane layoutX="0.0" layoutY="515.0" onMouseClicked="#endMove" prefHeight="70.0" prefWidth="800.0">
+    <Pane fx:id="gameButton" onMouseClicked="#changeStatus" layoutX="0.0" layoutY="515.0" prefHeight="70.0" prefWidth="800.0">
          <children>
-            <Text layoutX="0.0" layoutY="40.0" strokeType="OUTSIDE" text="Кнопка" fill="WHITE" textAlignment="CENTER" wrappingWidth="800.0">
+            <Text fx:id="gameButtonText" layoutX="0.0" layoutY="40.0" strokeType="OUTSIDE" text="Кнопка" fill="WHITE" textAlignment="CENTER" wrappingWidth="800.0">
              <font>
                <Font size="22.0" />
              </font>
             </Text>
-         </children></Pane>
+         </children>
+    </Pane>
   </children>
 </AnchorPane>

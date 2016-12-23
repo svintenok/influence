@@ -1,14 +1,19 @@
 package ru.kpfu.itis.group11501.influence.client.controllers;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.stage.Stage;
+import javafx.scene.text.Text;
 import ru.kpfu.itis.group11501.influence.client.Connection;
+import ru.kpfu.itis.group11501.influence.client.MovesRecipient;
 import ru.kpfu.itis.group11501.influence.client.helpers.*;
 import ru.kpfu.itis.group11501.influence.client.models.*;
 
@@ -22,6 +27,7 @@ import java.util.ResourceBundle;
  */
 public class GameController implements Initializable {
 
+    /*
     // FXML Resources
     private static final String WIN_FXML = "../fxml/win.fxml";
     private static final String LOSE_FXML = "../fxml/lose.fxml";
@@ -50,16 +56,23 @@ public class GameController implements Initializable {
     private Button btnSurrenderNo;
     @FXML
     private Button btnSurrenderYes;
+    */
 
-    // Panes
+
     @FXML
     private AnchorPane gameFieldPane;
     @FXML
-    private AnchorPane gamePane;
+    private Pane gamePane;
+    @FXML
+    private Text gameButtonText;
+
 
     private static GameMap gameMap;
+    private Status status;
+    private MovesRecipient movesRecipient;
+    private int pointsQuantity;
 
-
+    /*
     public void notification(ActionEvent actionEvent) {
 
         double shiftX = 255;
@@ -92,6 +105,7 @@ public class GameController implements Initializable {
         Stage stage = (Stage) btnSurrenderNo.getScene().getWindow();
         stage.close();
     }
+    */
 
 
     private void readMap() throws IOException {
@@ -123,8 +137,15 @@ public class GameController implements Initializable {
 
 
         //cells printing
-        for (Cell cell : gameMap.getCells())
+        for (Cell cell : gameMap.getCells()) {
             gameFieldPane.getChildren().add(cell.getCellPane());
+            cell.getCellPane().getChildren().get(2).setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    cellsHandler(cell);
+                }
+            });
+        }
 
         //routes printing
         for (Route route : gameMap.getRoutes()) {
@@ -135,6 +156,7 @@ public class GameController implements Initializable {
 
     }
 
+
     private void readStaringCells() throws IOException {
         Cell cell = gameMap.getCell(Connection.getBufferedInputStream().read());
         gameMap.changeCell(cell, 1, 2);
@@ -143,23 +165,76 @@ public class GameController implements Initializable {
         gameMap.changeCell(cell, 2, 3);;
     }
 
-    public void endMove(MouseEvent mouseEvent) {
-        System.out.println(1);
+
+    private void cellsHandler(Cell cell) {
+        System.out.println(gameMap.getStatus());
+        if (gameMap.getStatus() == Status.POWERS_DISTRIBUTION) {
+            if (cell.getType() == gameMap.getOrderNumber() && cell.getPower() < cell.getMaxPower()) {
+                if (pointsQuantity > 0) {
+                    cell.setPower(cell.getPower() + 1);
+                    pointsQuantity--;
+                    gameButtonText.setText("Power up your cells (" + pointsQuantity + ")");
+
+                    try {
+                        Connection.getBufferedOutputStream().write(cell.getNumber());
+                        Connection.getBufferedOutputStream().flush();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (pointsQuantity == 0)
+                        gameButtonText.setText("Click here to end turn");
+                }
+            }
+        }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("GameController initialized.");
-        if (btnGamePlay != null)
-            ButtonAnimator.animate(btnGamePlay);
+    public void changeStatus(MouseEvent mouseEvent) {
 
-        if (gameMap == null) {
+        System.out.println(gameMap.getStatus());
+
+        if (gameMap.getStatus() == Status.POWERS_DISTRIBUTION) {
+            gameMap.setStatus(status.WAITING);
+            gameButtonText.setText("Wait for you move");
+            pointsQuantity = gameMap.getCellsCountByType(gameMap.getOrderNumber());
+
             try {
-                readMap();
-                readStaringCells();
+                Connection.getBufferedOutputStream().write(0);
+                Connection.getBufferedOutputStream().flush();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        System.out.println("GameController initialized.");
+
+        try {
+            readMap();
+            readStaringCells();
+
+            pointsQuantity = gameMap.getCellsCountByType(gameMap.getOrderNumber());
+
+            if (gameMap.getOrderNumber() == 1) {
+                gameMap.setStatus(status.POWERS_DISTRIBUTION);
+                gameButtonText.setText("Power up your cells (" + pointsQuantity + ")");
+            }
+            else {
+                gameMap.setStatus(status.WAITING);
+                gameButtonText.setText("Wait for you move");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        movesRecipient = new MovesRecipient(gameMap, status, gameButtonText);
+    }
+
 }

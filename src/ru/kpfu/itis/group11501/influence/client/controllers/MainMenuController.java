@@ -42,7 +42,6 @@ public class MainMenuController implements Initializable {
         else if (actionEvent.getSource().equals(btnMainMenuRules)) {
             resource = RULES_FXML;
         }
-
         Loader.goTo(resource, menuPane);
     }
 

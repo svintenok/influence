@@ -73,13 +73,12 @@ public class Cell {
 
     public void setPower(int power) {
 
+        double scaleX = cellPane.getChildren().get(0).getScaleX();
+        cellPane.getChildren().get(0).setScaleX(scaleX + (power - this.power) * 0.025);
+        cellPane.getChildren().get(0).setScaleY(scaleX + (power - this.power) * 0.025);
+
         this.power = power;
         setValue(power);
-
-        double scaleX = cellPane.getChildren().get(0).getScaleX();
-        cellPane.getChildren().get(0).setScaleX(scaleX + 0.025);
-        cellPane.getChildren().get(0).setScaleY(scaleX + 0.025);
-
     }
 
     public int getMaxPower() {
@@ -110,5 +109,9 @@ public class Cell {
     public double getCenterY () {
         Bounds boundsInScene = cellPane.localToScene(cellPane.getBoundsInLocal());
         return boundsInScene.getMinY() + boundsInScene.getHeight() / 2 + 3.2;
+    }
+
+    public void setListener() {
+
     }
 }

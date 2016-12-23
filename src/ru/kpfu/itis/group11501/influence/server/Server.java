@@ -12,7 +12,7 @@ import java.net.Socket;
  */
 public class Server {
 
-    private final int PORT = 3456;
+    private final int PORT = 3450;
 
     public  Server() {
     }

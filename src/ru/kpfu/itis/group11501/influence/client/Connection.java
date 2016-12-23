@@ -12,7 +12,7 @@ import java.net.Socket;
  * Project: influence
  */
 public class Connection {
-    private static final int PORT = 3456;
+    private static final int PORT = 3450;
     private static final String HOST = "localhost";
     private static BufferedInputStream bufferedInputStream;
     private static BufferedOutputStream bufferedOutputStream;

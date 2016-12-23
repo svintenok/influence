@@ -114,6 +114,7 @@ public class Room implements Runnable{
         try {
             System.out.println("Ходит игрок " + (players.indexOf(movingPlayer) + 1));
 
+            /*
             while (movingPlayer.getBufferedInputStream().read() != 0){
                 waitingPlayer.getBufferedOutputStream().write(1);
                 waitingPlayer.getBufferedOutputStream().flush();
@@ -135,6 +136,17 @@ public class Room implements Runnable{
                 waitingPlayer.getBufferedOutputStream().write(cellNum);
                 waitingPlayer.getBufferedOutputStream().flush();
             }
+            */
+
+            int cellNum;
+
+            do {
+                cellNum = movingPlayer.getBufferedInputStream().read();
+                waitingPlayer.getBufferedOutputStream().write(cellNum);
+                waitingPlayer.getBufferedOutputStream().flush();
+
+            } while (cellNum != 0);
+
 
         } catch (IOException e) {
             e.printStackTrace();
