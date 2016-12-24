@@ -19,6 +19,7 @@ public class GameButton {
 
     private static final String GAME_BUTTON_FXML = "../fxml/game_button.fxml";
     private static final int SCREEN_WIDTH = 800;
+    private static final int GRADIENT_WIDTH = 20;
     private int enemyCells = 1;
     private int playerCells = 1;
     Stop[] stops;
@@ -51,8 +52,9 @@ public class GameButton {
         this.enemyCells = enemyCells;
         this.playerCells = playerCells;
 
-        startX = playerCells >= enemyCells ? 800 - (double) enemyCells / playerCells * 400 : (double) playerCells / enemyCells * 400;
-        endX = startX + 10;
+        startX = playerCells >= enemyCells ? SCREEN_WIDTH - (double) enemyCells / playerCells * SCREEN_WIDTH / 2 :
+                (double) playerCells / enemyCells * SCREEN_WIDTH / 2;
+        endX = startX + GRADIENT_WIDTH;
         System.out.println("Set! " + startX);
 
         linearGradient = new LinearGradient(startX, 0, endX, 0, false, CycleMethod.NO_CYCLE,
