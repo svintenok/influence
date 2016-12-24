@@ -22,7 +22,8 @@ public class MainMenuController implements Initializable {
 
     // FXMLResources
 
-    private static final String GAME_FXML = "../fxml/game.fxml";
+    private static final String WAITING_FXML = "../fxml/waiting.fxml";
+//    private static final String GAME_FXML = "../fxml/game.fxml";
     private static final String RULES_FXML = "../fxml/rules.fxml";
     private static String resource;
 
@@ -41,8 +42,11 @@ public class MainMenuController implements Initializable {
         if (actionEvent.getSource().equals(btnMainMenuExit)) {
             System.exit(0);
         }
+//        else if (actionEvent.getSource().equals(btnMainMenuPlayGame)) {
+//            resource = GAME_FXML;
+//        }
         else if (actionEvent.getSource().equals(btnMainMenuPlayGame)) {
-            resource = GAME_FXML;
+            resource = WAITING_FXML;
         }
         else if (actionEvent.getSource().equals(btnMainMenuRules)) {
             resource = RULES_FXML;

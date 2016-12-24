@@ -11,7 +11,7 @@
 }
 
 #game-field {
-    -fx-background-color: rgba(0, 0, 0, 0.7);
+    /*-fx-background-color: rgba(0, 0, 0, 0.7);*/
 }
 
 /* Label field for rules */
@@ -35,10 +35,21 @@
     -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
 }
 
+#waiting-label {
+    -fx-font-family: 'Xenara';
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+    -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
+}
+
 /* Background for all pages */
 #background {
     -fx-background-image: url("../img/background.jpg");
     -fx-background-repeat: stretch;
+}
+
+#background-black {
+    -fx-background-color: black;
 }
 
 #button-blue {

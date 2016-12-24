@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="pane" id="background-black" prefHeight="600.0" stylesheets="@../css/style.css" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.influence.controllers.WaitingController">
+  <children>
+    <Button id="button-blue" fx:id="btnWaiting" layoutX="540.0" layoutY="50.0" mnemonicParsing="false" onAction="#playGame" prefHeight="40.0" prefWidth="200.0" text="Test play" />
+    <Label id="waiting-label" layoutX="45.0" layoutY="450.0" prefHeight="172.5" prefWidth="725.0" text="Waiting for the second player..." textFill="#004166" />
+  </children>
+</Pane>
