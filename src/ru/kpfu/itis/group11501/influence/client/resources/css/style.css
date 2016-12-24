@@ -134,3 +134,14 @@
     -fx-font-size: 30px;
     -fx-text-fill: linear-gradient(whitesmoke, lightgray);
 }
+
+#background-black {
+    -fx-background-color: black;
+}
+
+#waiting-label {
+    -fx-font-family: 'Xenara';
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+    -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
+}

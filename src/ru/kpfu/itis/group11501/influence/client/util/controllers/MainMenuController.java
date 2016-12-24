@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import ru.kpfu.itis.group11501.influence.client.util.Connection;
 import ru.kpfu.itis.group11501.influence.client.util.helpers.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -22,6 +23,7 @@ public class MainMenuController implements Initializable {
     // FXML Resources
     private static final String GAME_FXML = "../../fxml/game.fxml";
     private static final String RULES_FXML = "../../fxml/rules.fxml";
+    private static final String WAITING_FXML = "../../fxml/waiting.fxml";
 
     // Buttons from MainMenu
     @FXML
@@ -42,8 +44,15 @@ public class MainMenuController implements Initializable {
             System.exit(0);
         }
         else if (actionEvent.getSource().equals(btnMainMenuPlayGame)) {
-            resource = GAME_FXML;
-            Connection.init();
+            try {
+                Connection.init();
+                if (Connection.getBufferedInputStream().read() == 1)
+                    resource = WAITING_FXML;
+                else
+                    resource = GAME_FXML;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else if (actionEvent.getSource().equals(btnMainMenuRules)) {
             resource = RULES_FXML;

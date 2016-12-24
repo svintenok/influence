@@ -52,6 +52,14 @@ public class Cell {
         }
     }
 
+    public Cell() {
+        try {
+            cellPane = FXMLLoader.load(getClass().getResource(CELL_FXML));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getNumber() {
         return number;
     }
@@ -93,7 +101,7 @@ public class Cell {
         return cellPane;
     }
 
-    private void setColor(Color color) {
+    public void setColor(Color color) {
         Polygon innerHexagon = (Polygon) cellPane.getChildren().get(0);
         Polygon outerStroke = (Polygon) cellPane.getChildren().get(1);
         innerHexagon.setFill(color);

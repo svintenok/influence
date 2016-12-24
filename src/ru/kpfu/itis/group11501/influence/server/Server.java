@@ -17,23 +17,39 @@ public class Server {
     public  Server() {
     }
 
-    private void go() throws IOException {
+    private void go() {
 
-        ServerSocket serverSocket = new ServerSocket(PORT);
+        try {
+            ServerSocket serverSocket = new ServerSocket(PORT);
 
-        while (true) {
-            Socket socket1 = serverSocket.accept();
-            System.out.println("First player connected");
-            Socket socket2 = serverSocket.accept();
-            System.out.println("Second player connected");
-            System.out.println("Room creating...");
-            new Room(socket1, socket2);
-            System.out.println("Room created");
+            while (true) {
+                Socket socket1 = serverSocket.accept();
+                System.out.println("First player connected");
+                Player player1 = new Player(socket1);
+
+                player1.getBufferedOutputStream().write(1);
+                player1.getBufferedOutputStream().flush();
+
+                Socket socket2 = serverSocket.accept();
+                System.out.println("Second player connected");
+                Player player2 = new Player(socket2);
+
+                player2.getBufferedOutputStream().write(2);
+                player2.getBufferedOutputStream().flush();
+                player1.getBufferedOutputStream().write(2);
+                player1.getBufferedOutputStream().flush();
+
+                System.out.println("Room creating...");
+                new Room(player1, player2);
+                System.out.println("Room created");
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         (new Server()).go();
     }
 }

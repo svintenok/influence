@@ -18,10 +18,10 @@ public class Room implements Runnable{
     private Random random;
 
 
-    public Room(Socket socket1, Socket socket2) throws IOException {
+    public Room(Player player1, Player player2) throws IOException {
         this.players = new ArrayList<>();
-        players.add(new Player(socket1));
-        players.add(new Player(socket2));
+        players.add(player1);
+        players.add(player2);
 
         System.out.println("GameMap generating..");
         graphGenerator = new GraphGenerator();
@@ -44,7 +44,6 @@ public class Room implements Runnable{
         while (flag) {
             if (!(move(players.get(0), players.get(1)) && move(players.get(1), players.get(0))))
                 flag = false;
-
         }
 
         closeRoom();
@@ -71,7 +70,6 @@ public class Room implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void sendStartingCells() {
@@ -153,6 +151,7 @@ public class Room implements Runnable{
 
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
         return true;
     }
