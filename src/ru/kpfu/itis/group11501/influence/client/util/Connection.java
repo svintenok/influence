@@ -14,19 +14,21 @@ import java.net.Socket;
 public class Connection {
     private static final int PORT = 3450;
     private static final String HOST = "localhost";
+    private static Socket socket;
     private static BufferedInputStream bufferedInputStream;
     private static BufferedOutputStream bufferedOutputStream;
 
     public static void init() {
         try {
-            Socket s = new Socket(HOST, PORT);
-            bufferedInputStream = new BufferedInputStream(s.getInputStream());
-            bufferedOutputStream = new BufferedOutputStream(s.getOutputStream());
+            socket = new Socket(HOST, PORT);
+            bufferedInputStream = new BufferedInputStream(socket.getInputStream());
+            bufferedOutputStream = new BufferedOutputStream(socket.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("Connection set");
     }
+
 
     public static BufferedInputStream getBufferedInputStream() {
         return bufferedInputStream;

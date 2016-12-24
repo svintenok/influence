@@ -14,6 +14,7 @@ public class GameMap {
     private List<Cell> cells;
     private List<Route> routes;
     private int orderNumber;
+    private int enemyOrderNumber;
     private Status status;
 
     public final static int maxX = 14;
@@ -143,6 +144,10 @@ public class GameMap {
 
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
+        if (orderNumber == 1)
+            this.enemyOrderNumber = 2;
+        else
+            this.enemyOrderNumber = 1;
     }
 
     public void changeCell(Cell cell, int type, int power) {
@@ -167,5 +172,9 @@ public class GameMap {
 
     public void setStatus(Status status){
         this.status = status;
+    }
+
+    public int getEnemyOrderNumber() {
+        return enemyOrderNumber;
     }
 }

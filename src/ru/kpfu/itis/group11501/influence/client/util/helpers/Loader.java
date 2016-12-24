@@ -20,8 +20,12 @@ import java.io.IOException;
 public class Loader {
 
     public static void goTo(String resource, Pane pane){
+        Stage stage = (Stage) pane.getScene().getWindow();
+        goTo(resource, stage);
+    }
+
+    public static void goTo(String resource, Stage stage){
         try {
-            Stage stage = (Stage) pane.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Loader.class.getResource(resource));
             Parent root = fxmlLoader.load();
             Scene scene = new Scene(root);
@@ -33,16 +37,20 @@ public class Loader {
         }
     }
 
-    public static void openModalWindow(String resource, Pane pane, double shiftX, double shiftY){
+    public static void openModalWindow(String resource, Pane pane){
 
         try {
+            double shiftX = 255;
+            double shiftY = 200;
+
             Bounds boundsInScreen = pane.localToScreen(pane.getBoundsInLocal());
 
             double coordinateX = boundsInScreen.getMinX();
             double coordinateY = boundsInScreen.getMinY();
 
             Stage modalStage = new Stage();
-            Parent modalWindow = javafx.fxml.FXMLLoader.load(Loader.class.getResource(resource));
+            FXMLLoader fxmlLoader = new FXMLLoader(Loader.class.getResource(resource));
+            Parent modalWindow = fxmlLoader.load();
             modalStage.setX(coordinateX + shiftX);
             modalStage.setY(coordinateY + shiftY);
             modalStage.initStyle(StageStyle.UNDECORATED);

@@ -42,11 +42,13 @@ public class Room implements Runnable{
         boolean flag = true;
 
         while (flag) {
-            if (!(move(players.get(0), players.get(1)) && move(players.get(1), players.get(0)))) {
+            if (!(move(players.get(0), players.get(1)) && move(players.get(1), players.get(0))))
                 flag = false;
-                closeRoom();
-            }
+
         }
+
+        closeRoom();
+        System.out.println("Конец игры");
     }
 
     private void sendMap(){
@@ -124,12 +126,23 @@ public class Room implements Runnable{
                 waitingPlayer.getBufferedOutputStream().write(moving);
                 waitingPlayer.getBufferedOutputStream().flush();
             }
+
+            int count = movingPlayer.getBufferedInputStream().read();
+
+
+            if (count == 0) {
+                movingPlayer.getBufferedOutputStream().write(0);
+                waitingPlayer.getBufferedOutputStream().flush();
+                waitingPlayer.getBufferedOutputStream().write(new byte[]{0, 0});
+                waitingPlayer.getBufferedOutputStream().flush();
+                return false;
+            }
+
+
             waitingPlayer.getBufferedOutputStream().write(0);
             waitingPlayer.getBufferedOutputStream().flush();
 
 
-
-            int count = movingPlayer.getBufferedInputStream().read();
             waitingPlayer.getBufferedOutputStream().write(count);
             waitingPlayer.getBufferedOutputStream().flush();
             for (int i = 0; i < count; i++){
@@ -146,8 +159,9 @@ public class Room implements Runnable{
 
     private void closeRoom() {
         try {
-            for (Player player: players)
+            for (Player player: players) {
                 player.getSocket().close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

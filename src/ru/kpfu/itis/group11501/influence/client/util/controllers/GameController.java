@@ -4,13 +4,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import ru.kpfu.itis.group11501.influence.client.util.Connection;
 import ru.kpfu.itis.group11501.influence.client.util.MovesRecipient;
 import ru.kpfu.itis.group11501.influence.client.models.*;
+import ru.kpfu.itis.group11501.influence.client.util.helpers.Loader;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -26,29 +26,14 @@ import java.util.ResourceBundle;
  */
 public class GameController implements Initializable {
 
-    /*
     // FXML Resources
-    private static final String WIN_FXML = "../fxml/win.fxml";
-    private static final String LOSE_FXML = "../fxml/lose.fxml";
-    private static final String SURRENDER_FXML = "../fxml/surrender.fxml";
-    private String resource;
+    private static final String WIN_FXML = "../../fxml/win.fxml";
 
+/*
+    private static final String SURRENDER_FXML = "../fxml/surrender.fxml";
     // Buttons from game screen
     @FXML
     private Button btnSurrender;
-    @FXML
-    private Button btnTestWin;
-    @FXML
-    private Button btnTestLose;
-    @FXML
-    private Button btnGamePlay;
-
-
-    // Buttons from Win/Lose pop-up windows
-    @FXML
-    private Button btnWinNotificationOk;
-    @FXML
-    private Button btnLoseNotificationOk;
 
     // Buttons from Surrender pop-up window
     @FXML
@@ -59,17 +44,18 @@ public class GameController implements Initializable {
 
 
     @FXML
-    private AnchorPane gameFieldPane;
+    private Pane gameFieldPane;
     @FXML
     private Pane gamePane;
     @FXML
     private Text gameButtonText;
 
 
-    private static GameMap gameMap;
+    private GameMap gameMap;
     private int pointsQuantity;
     private Cell selectedCell;
     private Random random;
+    private MovesRecipient movesRecipient;
 
     /*
     public void notification(ActionEvent actionEvent) {
@@ -90,15 +76,6 @@ public class GameController implements Initializable {
         Loader.openModalWindow(resource, gamePane, shiftX, shiftY);
     }
 
-    public void winEvent(ActionEvent actionEvent) {
-        Stage modalStage = (Stage) btnWinNotificationOk.getScene().getWindow();
-        modalStage.close();
-    }
-
-    public void loseEvent(ActionEvent actionEvent) {
-        Stage modalStage = (Stage) btnLoseNotificationOk.getScene().getWindow();
-        modalStage.close();
-    }
 
     public void surrenderRefuse(ActionEvent actionEvent) {
         Stage stage = (Stage) btnSurrenderNo.getScene().getWindow();
@@ -148,6 +125,16 @@ public class GameController implements Initializable {
                     }
                 }
             });
+            cell.getCellPane().getChildren().get(0).setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    try {
+                        cellsHandler(cell);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
 
         //routes printing
@@ -171,11 +158,10 @@ public class GameController implements Initializable {
 
     private void cellsHandler(Cell cell) throws IOException {
 
-
         if (gameMap.getStatus() == Status.POWERS_DISTRIBUTION) {
             if (cell.getType() == gameMap.getOrderNumber() && cell.getPower() < cell.getMaxPower()) {
                 if (pointsQuantity > 0) {
-                    cell.setPower(cell.getPower() + 1);
+                    cell.increasePower();
                     pointsQuantity--;
                     gameButtonText.setText("Power up your cells (" + pointsQuantity + ")");
 
@@ -225,8 +211,7 @@ public class GameController implements Initializable {
                     toCell.selecting();
 
                     if (toCell.getType() == 0){
-                        toCell.setType(gameMap.getOrderNumber());
-                        toCell.setPower(selectedCell.getPower() - 1);
+                        gameMap.changeCell(toCell, gameMap.getOrderNumber(), selectedCell.getPower() - 1);
                         selectedCell.setPower(1);
                     }
 
@@ -238,7 +223,7 @@ public class GameController implements Initializable {
                             toCell.setPower(Math.abs(selectedCellPower - toCellPower) <= toCell.getMaxPower() ? Math.abs(selectedCellPower - toCellPower) : toCell.getMaxPower());
                             selectedCell.setPower(1);
                             if (selectedCellPower > toCellPower) {
-                                toCell.setType(gameMap.getOrderNumber());
+                                gameMap.changeCell(toCell, gameMap.getOrderNumber(), toCell.getPower());
                                 if (toCell.getMaxPower() < Math.abs(selectedCellPower - toCellPower))
                                     selectedCell.setPower((toCell.getMaxPower() - (selectedCellPower - toCellPower)));
                             }
@@ -246,14 +231,18 @@ public class GameController implements Initializable {
                         } else {
                             selectedCell.setPower(1);
                             toCell.setPower(1);
-                            if (selectedCellPower == toCellPower)
+                            if (selectedCellPower == toCellPower) {
                                 if (random.nextDouble() > 0.5)
-                                    toCell.setPower(gameMap.getOrderNumber());
-                                else if (selectedCellPower > toCellPower)
-                                    if (random.nextDouble() > 0.25)
-                                        toCell.setPower(gameMap.getOrderNumber());
-                                    else if (random.nextDouble() > 0.75)
-                                        toCell.setPower(gameMap.getOrderNumber());
+                                    gameMap.changeCell(toCell, gameMap.getOrderNumber(), toCell.getPower());
+                            }
+                            else if (selectedCellPower > toCellPower) {
+                                if (random.nextDouble() > 0.25)
+                                    gameMap.changeCell(toCell, gameMap.getOrderNumber(), toCell.getPower());
+                            }
+                            else {
+                                if (random.nextDouble() > 0.75)
+                                    gameMap.changeCell(toCell, gameMap.getOrderNumber(), toCell.getPower());
+                            }
                         }
                     }
 
@@ -272,15 +261,26 @@ public class GameController implements Initializable {
                     Connection.getBufferedOutputStream().flush();
 
 
-                    selectedCell.deleteSelecting();
-                    if (toCell.getType() == gameMap.getOrderNumber()){
-                        selectedCell = toCell;
-                        if (toCell.getPower() == 1)
-                            gameButtonText.setText("Select a cell with 2+ power");
+                    if (gameMap.getCellsCountByType(gameMap.getEnemyOrderNumber()) == 0) {
+                        //game ending
+                        Connection.getBufferedOutputStream().write(new byte[]{0, 0});
+                        Connection.getBufferedOutputStream().flush();
+                        movesRecipient.interrupt();
+                        Loader.openModalWindow(WIN_FXML, gamePane);
                     }
-                    else
-                        toCell.deleteSelecting();
-                        gameButtonText.setText("Touch a cell of your color");
+                    else {
+
+                        selectedCell.deleteSelecting();
+                        if (toCell.getType() == gameMap.getOrderNumber()) {
+                            selectedCell = toCell;
+                            selectedCell.selecting();
+                            if (toCell.getPower() == 1)
+                                gameButtonText.setText("Select a cell with 2+ power");
+                        } else {
+                            toCell.deleteSelecting();
+                            gameButtonText.setText("Touch a cell of your color");
+                        }
+                    }
                 }
             }
         }
@@ -325,8 +325,7 @@ public class GameController implements Initializable {
             if (gameMap.getOrderNumber() == 1) {
                 gameMap.setStatus(Status.CAPTURE);
                 gameButtonText.setText("Touch a cell of your color");
-            }
-            else {
+            } else {
                 gameMap.setStatus(Status.WAITING);
                 gameButtonText.setText("Wait for you move");
             }
@@ -335,8 +334,10 @@ public class GameController implements Initializable {
             e.printStackTrace();
         }
 
-        random =  new Random();
-        new MovesRecipient(gameMap, gameButtonText);
+        random = new Random();
+        movesRecipient = new MovesRecipient(gameMap, gameButtonText, gamePane);
+
+
     }
 
 }

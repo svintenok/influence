@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import ru.kpfu.itis.group11501.influence.client.util.helpers.FloatingPoint;
 
 import java.io.IOException;
 
@@ -77,6 +78,11 @@ public class Cell {
 
         this.power = power;
         setValue(power);
+    }
+
+    public void increasePower() {
+        setPower(getPower() + 1);
+        FloatingPoint.start(cellPane);
     }
 
     public int getMaxPower() {
