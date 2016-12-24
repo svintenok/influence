@@ -10,11 +10,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ru.kpfu.itis.influence.helpers.ButtonAnimator;
 import ru.kpfu.itis.influence.models.Cell;
+import ru.kpfu.itis.influence.models.GameButton;
 import ru.kpfu.itis.influence.models.GameField;
 
 import java.io.IOException;
@@ -49,8 +51,14 @@ public class GameController implements Initializable {
     private Button btnTestWin;
     @FXML
     private Button btnTestLose;
+//    @FXML
+//    private Button btnGamePlay;
+
+    GameButton gameButton;
     @FXML
-    private Button btnGamePlay;
+    private AnchorPane gamePane;
+
+    //
 
     private static boolean btnGamePlayAnimated = false;
 
@@ -80,6 +88,10 @@ public class GameController implements Initializable {
     private static double y;
     private static double shiftX = 0;
     private static double shiftY = 0;
+
+    public void clicked() {
+        System.out.println("Clicked!");
+    }
 
     public void addCell() {
 
@@ -158,9 +170,10 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("GameController initialized.");
-        if (!btnGamePlayAnimated) {
-            ButtonAnimator.animate(btnGamePlay);
-            btnGamePlayAnimated = true;
-        }
+//        ButtonAnimator.animate(btnGamePlay);
+        gameButton = new GameButton(Color.BLUE, Color.RED);
+        gameButton.setCellsNumbers(5, 10);
+        gamePane.getChildren().add(gameButton.getPaneForm());
+
     }
 }

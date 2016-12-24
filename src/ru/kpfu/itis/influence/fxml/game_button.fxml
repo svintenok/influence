@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<Pane layoutY="500" prefHeight="100" prefWidth="800" stylesheets="@../css/style.css">
+    <Rectangle width="800" height="10" fill="lawngreen" />
+    <Label id="game-button-main-label" text="Label1" alignment="CENTER" layoutY="25" prefWidth="800"/>
+    <Label id="game-button-secondary-label" text="Label2" alignment="CENTER" layoutY="60" prefWidth="800"/>
+    <Rectangle layoutY="90" width="800" height="10" fill="aquamarine"/>
+</Pane>

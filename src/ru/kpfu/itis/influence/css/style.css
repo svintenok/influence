@@ -145,3 +145,15 @@
     -fx-font-size: 30px;
     -fx-text-fill: linear-gradient(whitesmoke, lightgray);
 }
+
+#game-button-main-label {
+    -fx-font-family: 'Xenara';
+    -fx-font-size: 20px;
+    -fx-text-fill: linear-gradient(whitesmoke, ghostwhite);
+}
+
+#game-button-secondary-label {
+    -fx-font-family: 'Xenara';
+    -fx-font-size: 15px;
+    -fx-text-fill: "#303030";
+}
