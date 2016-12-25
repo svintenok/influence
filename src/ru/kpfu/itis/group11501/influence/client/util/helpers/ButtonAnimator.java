@@ -6,7 +6,10 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.util.Duration;
 
 /**
- * Created by cmen on 12/12/16.
+ * Author: Menshenin Konstantin
+ * Date: 12.12.2016
+ * Group: 11-501
+ * Project: influence
  */
 public class ButtonAnimator {
 

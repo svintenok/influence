@@ -21,7 +21,7 @@ public class GraphGenerator {
     public final int cellsCount = 77;
     public final int cellsMaxCount = 121;
     public final double bigCellsPercent = 0.15;
-    public final double routesAddingPercent = 0.68;
+    public final double routesAddingPercent = 0.69;
 
     private Map<Integer, Cell> cellsMap;
     private Map<Integer, Set<Integer>> routesMap;
@@ -221,6 +221,20 @@ public class GraphGenerator {
         } else {
             System.out.print("  ");
         }
+    }
+
+    public  boolean isConnected(int cell1Number, int cell2Number){
+        int toCellNumber = cell1Number;
+        int fromCellNumber = cell2Number;
+
+        if (cell1Number < cell2Number){
+            fromCellNumber = cell1Number;
+            toCellNumber = cell2Number;
+        }
+
+        if (routesMap.get(fromCellNumber) != null && routesMap.get(fromCellNumber).contains(toCellNumber))
+            return true;
+        return false;
     }
 
     public Cell getCell(int cellNum){

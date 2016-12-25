@@ -2,7 +2,6 @@ package ru.kpfu.itis.group11501.influence.client.util;
 
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import ru.kpfu.itis.group11501.influence.client.models.Cell;
 import ru.kpfu.itis.group11501.influence.client.models.GameButton;
 import ru.kpfu.itis.group11501.influence.client.models.GameMap;
@@ -98,13 +97,14 @@ public class MovesRecipient implements Runnable {
 
             } catch (IOException e) {
                 e.printStackTrace();
+                break;
             }
 
             gameMap.setStatus(Status.CAPTURE);
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    gameButton.setText("Touch a cell of your color", "or touch here to end attack");
+                    gameButton.setText("Touch a cell of your color", "or touch here to end attack", true);
                 }
             });
         }

@@ -148,12 +148,11 @@
 
 #game-button-main-label {
     -fx-font-family: 'Xenara';
-    -fx-font-size: 22px;
-    -fx-text-fill: whitesmoke;
+    -fx-font-size: 24px;
 }
 
 #game-button-secondary-label {
     -fx-font-family: 'Xenara';
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-text-fill: "#303030";
 }

@@ -2,7 +2,6 @@ package ru.kpfu.itis.group11501.influence.server;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.net.Socket;
 import java.util.*;
 
 /**
@@ -47,7 +46,7 @@ public class Room implements Runnable{
         }
 
         closeRoom();
-        System.out.println("Конец игры");
+        System.out.println("End of game");
     }
 
     private void sendMap(){
@@ -58,10 +57,10 @@ public class Room implements Runnable{
 
             for (Player player: players) {
                 player.getBufferedOutputStream().write(cells.length);
-                System.out.println(cells.length);
+
                 player.getBufferedOutputStream().write(cells);
                 player.getBufferedOutputStream().write(BigInteger.valueOf(routes.length).toByteArray());
-                System.out.println(routes.length);
+
                 player.getBufferedOutputStream().write(routes);
                 player.getBufferedOutputStream().flush();
             }
@@ -82,6 +81,9 @@ public class Room implements Runnable{
             } while (graphGenerator.getCell(cellNum) == null || occupiedCells.contains(cellNum));
 
             occupiedCells.add(cellNum);
+            for (int j = 1; j <= graphGenerator.cellsMaxCount; j++)
+                if (graphGenerator.isConnected(j, cellNum))
+                    occupiedCells.add(j);
 
             try {
                 for (Player player: players){
@@ -112,7 +114,7 @@ public class Room implements Runnable{
 
     private boolean move(Player movingPlayer, Player waitingPlayer){
         try {
-            System.out.println("Ходит игрок " + (players.indexOf(movingPlayer) + 1));
+            System.out.println("Moving player " + (players.indexOf(movingPlayer) + 1));
 
 
             while (movingPlayer.getBufferedInputStream().read() != 0){

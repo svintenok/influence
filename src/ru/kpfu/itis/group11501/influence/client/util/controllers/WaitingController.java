@@ -85,21 +85,10 @@ public class WaitingController implements Initializable {
             byte[] routes = new byte[new BigInteger(routesArraySize).intValue()];
             Connection.getBufferedInputStream().read(routes);
 
-            //logs
-            for (int i = 0; i < cells.length; i++)
-                System.out.print(cells[i]  + " ");
-            System.out.println();
-
-            //logs
-            for (int i = 0; i < routes.length; i++)
-                System.out.print(routes[i]  + " ");
-            System.out.println();
 
             gameMap = new GameMap(cells, routes);
             gameMap.setOrderNumber(Connection.getBufferedInputStream().read());
 
-            //logs
-            gameMap.printGameMap();
     }
 
     private void readStaringCells() throws IOException {

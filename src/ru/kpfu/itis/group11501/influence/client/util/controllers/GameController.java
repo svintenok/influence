@@ -27,19 +27,12 @@ public class GameController implements Initializable {
     // FXML Resources
     private static final String WIN_FXML = "../../fxml/win.fxml";
 
-/*
+    /*
     private static final String SURRENDER_FXML = "../fxml/surrender.fxml";
     // Buttons from game screen
     @FXML
     private Button btnSurrender;
-
-    // Buttons from Surrender pop-up window
-    @FXML
-    private Button btnSurrenderNo;
-    @FXML
-    private Button btnSurrenderYes;
     */
-
 
     @FXML
     private Pane gameFieldPane;
@@ -55,31 +48,16 @@ public class GameController implements Initializable {
     private GameButton gameButton;
 
     /*
-    public void notification(ActionEvent actionEvent) {
+    public void openSurrenderModalWindow(ActionEvent actionEvent) {
 
-        double shiftX = 255;
-        double shiftY = 200;
-
-        if (actionEvent.getSource().equals(btnSurrender)) {
-            shiftX = 175;
-            resource = SURRENDER_FXML;
-        }
-        else if (actionEvent.getSource().equals(btnTestLose)) {
-            resource = LOSE_FXML;
-        }
-        else if (actionEvent.getSource().equals(btnTestWin)) {
-            resource = WIN_FXML;
-        }
-        Loader.openModalWindow(resource, gamePane, shiftX, shiftY);
+        Loader.openModalWindow(SURRENDER_FXML, gamePane, 175, 200);
     }
-
 
     public void surrenderRefuse(ActionEvent actionEvent) {
         Stage stage = (Stage) btnSurrenderNo.getScene().getWindow();
         stage.close();
     }
     */
-
 
     private void printMap() throws IOException {
 
@@ -144,6 +122,7 @@ public class GameController implements Initializable {
         }
 
         else if (gameMap.getStatus() == Status.CAPTURE) {
+
             if (selectedCell == null) {
                 if (cell.getType() == gameMap.getOrderNumber()) {
                     cell.selecting();
@@ -241,16 +220,20 @@ public class GameController implements Initializable {
                                 gameButton.setText("Select a cell with 2+ power", "or touch here to end attack");
                         } else {
                             toCell.deleteSelecting();
-                            gameButton.setText("Touch a cell of your color", "or touch here to end attack");
+                            gameButton.setText("Touch a cell of your color", "or touch here to end attack", true);
                         }
                     }
                 }
             }
+
+            if (gameMap.getPowersByType(gameMap.getOrderNumber()) == gameMap.getCellsCountByType(gameMap.getOrderNumber()))
+                gameButton.setText("Touch here to end attack");
         }
     }
 
     public void changeStatus() {
 
+        gameButton.animate();
 
         if (gameMap.getStatus() == Status.CAPTURE){
             if (selectedCell != null){
@@ -271,13 +254,39 @@ public class GameController implements Initializable {
                 e.printStackTrace();
             }
         }
+        else if (gameMap.getStatus() == Status.POWERS_DISTRIBUTION) {
+            runAutomaticPowersDistribution();
+        }
     }
 
+    private void runAutomaticPowersDistribution() {
+        while (pointsQuantity > 0) {
+            for (Cell cell : gameMap.getCellsByType(gameMap.getOrderNumber())) {
+                if (cell.getPower() < cell.getMaxPower()) {
+
+                    cell.increasePower();
+                    pointsQuantity--;
+                    gameButton.updatePowersBalance();
+
+                    try {
+                        Connection.getBufferedOutputStream().write(cell.getNumber());
+                        Connection.getBufferedOutputStream().flush();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (pointsQuantity == 0) {
+                        gameMap.setStatus(Status.WAITING);
+                        gameButton.setText("Wait for you move");
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        System.out.println("GameController initialized.");
 
         try {
             gameMap = Connection.getGameMap();
@@ -296,7 +305,7 @@ public class GameController implements Initializable {
 
             if (gameMap.getOrderNumber() == 1) {
                 gameMap.setStatus(Status.CAPTURE);
-                gameButton.setText("Touch a cell of your color", "or touch here to end attack");
+                gameButton.setText("Touch a cell of your color", "or touch here to end attack", true);
 
             } else {
                 gameMap.setStatus(Status.WAITING);

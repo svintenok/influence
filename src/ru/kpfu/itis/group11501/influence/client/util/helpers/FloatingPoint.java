@@ -10,7 +10,10 @@ import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
 /**
- * Created by cmen on 23/12/16.
+ * Author: Menshenin Konstantin
+ * Date: 23.12.2016
+ * Group: 11-501
+ * Project: influence
  */
 public class FloatingPoint {
 

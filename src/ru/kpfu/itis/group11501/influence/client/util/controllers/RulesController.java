@@ -32,7 +32,6 @@ public class RulesController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("RulesControlled initialized!");
         ButtonAnimator.animate(btnRulesBack);
     }
 }

@@ -52,47 +52,6 @@ public class GameMap {
         }
     }
 
-
-    public void printGameMap(String view){
-
-        System.out.println("--------------------------");
-        for (int i = 1; i <= maxY; i++) {
-            if (i % 2 == 1)
-                System.out.print(" ");
-
-            for (int j = 1; j < maxX; j++)
-                printCell((i - 1) * (maxX - 1) + ((i - 1) / 2) + j, view);
-
-            if (i % 2 == 0)
-                printCell((i - 1) * (maxX - 1) + ((i - 1) / 2) + maxX, view);
-
-            System.out.println();
-        }
-        System.out.println("--------------------------");
-        System.out.println(routes);
-    }
-
-    public void printCell(int cellNum, String view){
-        Cell cell  = getCell(cellNum);
-        if (cell != null) {
-           if (view.equals("type"))
-                System.out.print(cell.getType() + " ");
-            else if (view.equals("power"))
-                System.out.print(cell.getPower() + " ");
-            else if (view.equals("maxPower"))
-                System.out.print(cell.getMaxPower() + " ");
-            else if (view.equals("number"))
-                System.out.print(cell.getNumber() + " ");
-
-        } else {
-            System.out.print("  ");
-        }
-    }
-
-    public void printGameMap(){
-        printGameMap("type");
-    }
-
     public Cell getCell(int cellNum){
 
         for (Cell cell: cells)
@@ -103,13 +62,7 @@ public class GameMap {
     }
 
     public int getCellsCountByType(int type){
-
-        int count = 0;
-        for (Cell cell: cells)
-            if (cell.getType() == type)
-                count++;
-
-        return count;
+        return getCellsByType(type).size();
     }
 
     public boolean isConnected(Cell cell1, Cell cell2) {
@@ -180,10 +133,18 @@ public class GameMap {
 
     public int getPowersByType(int type) {
         int powers = 0;
-        for (Cell cell: cells)
-            if (cell.getType() == type)
+        for (Cell cell: getCellsByType(type))
                 powers += cell.getPower();
 
         return powers;
+    }
+
+    public List<Cell> getCellsByType(int type) {
+        List<Cell> cellList = new ArrayList<>();
+        for (Cell cell: cells)
+            if (cell.getType() == type)
+                cellList.add(cell);
+
+        return cellList;
     }
 }
