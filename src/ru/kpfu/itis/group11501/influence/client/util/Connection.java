@@ -1,5 +1,7 @@
 package ru.kpfu.itis.group11501.influence.client.util;
 
+import ru.kpfu.itis.group11501.influence.client.models.GameMap;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -17,6 +19,7 @@ public class Connection {
     private static Socket socket;
     private static BufferedInputStream bufferedInputStream;
     private static BufferedOutputStream bufferedOutputStream;
+    private static GameMap gameMap;
 
     public static void init() {
         try {
@@ -36,5 +39,13 @@ public class Connection {
 
     public static BufferedOutputStream getBufferedOutputStream() {
         return bufferedOutputStream;
+    }
+
+    public static GameMap getGameMap() {
+        return gameMap;
+    }
+
+    public static void setGameMap(GameMap gameMap) {
+        Connection.gameMap = gameMap;
     }
 }

@@ -5,6 +5,6 @@
 
 <Pane fx:id="waitingPane" id="background-black" prefHeight="600.0" stylesheets="@../resources/css/style.css" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ru.kpfu.itis.group11501.influence.client.util.controllers.WaitingController">
     <children>
-        <Label id="waiting-label" layoutX="45.0" layoutY="340.0" prefHeight="172.5" prefWidth="725.0" text="Waiting for the second player..." textFill="#3A5FCD" />
+        <Label fx:id="waitingText" id="waiting-label"  layoutY="420.0"  alignment="CENTER" prefWidth="800" textFill="#3A5FCD" />
     </children>
 </Pane>

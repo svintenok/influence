@@ -6,14 +6,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Text;
 import ru.kpfu.itis.group11501.influence.client.util.Connection;
 import ru.kpfu.itis.group11501.influence.client.util.MovesRecipient;
 import ru.kpfu.itis.group11501.influence.client.models.*;
 import ru.kpfu.itis.group11501.influence.client.util.helpers.Loader;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -83,33 +81,7 @@ public class GameController implements Initializable {
     */
 
 
-    private void readMap() throws IOException {
-        //cells reading
-        byte[] cells = new byte[Connection.getBufferedInputStream().read()];
-        Connection.getBufferedInputStream().read(cells);
-
-        //routes reading
-        byte[] routesArraySize = new byte[2];
-        Connection.getBufferedInputStream().read(routesArraySize);
-        byte[] routes = new byte[new BigInteger(routesArraySize).intValue()];
-        Connection.getBufferedInputStream().read(routes);
-
-        //logs
-        for (int i = 0; i < cells.length; i++)
-            System.out.print(cells[i]  + " ");
-        System.out.println();
-
-        //logs
-        for (int i = 0; i < routes.length; i++)
-            System.out.print(routes[i]  + " ");
-        System.out.println();
-
-        gameMap = new GameMap(cells, routes);
-        gameMap.setOrderNumber(Connection.getBufferedInputStream().read());
-
-        //logs
-        gameMap.printGameMap();
-
+    private void printMap() throws IOException {
 
         //cells printing
         for (Cell cell : gameMap.getCells()) {
@@ -142,16 +114,6 @@ public class GameController implements Initializable {
             gameFieldPane.getChildren().add(edge);
             edge.toBack();
         }
-
-    }
-
-
-    private void readStaringCells() throws IOException {
-        Cell cell = gameMap.getCell(Connection.getBufferedInputStream().read());
-        gameMap.changeCell(cell, 1, 2);
-
-        cell = gameMap.getCell(Connection.getBufferedInputStream().read());
-        gameMap.changeCell(cell, 2, 3);
     }
 
 
@@ -317,10 +279,9 @@ public class GameController implements Initializable {
 
         System.out.println("GameController initialized.");
 
-
         try {
-            readMap();
-            readStaringCells();
+            gameMap = Connection.getGameMap();
+            printMap();
 
             gameButton = new GameButton(gameMap);
             gamePane.getChildren().add(gameButton.getGameButtonPane());
@@ -348,7 +309,6 @@ public class GameController implements Initializable {
 
         random = new Random();
         movesRecipient = new MovesRecipient(gameMap, gameButton, gamePane);
-
 
     }
 
