@@ -1,5 +1,6 @@
 package ru.kpfu.itis.influence.models;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -9,6 +10,7 @@ import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -39,7 +41,18 @@ public class GameButton {
             ((Rectangle) gameButton.getChildren().get(0)).setFill(linearGradient);
             ((Rectangle) gameButton.getChildren().get(3)).setFill(playerColor);
 
+            FadeTransition fadeTransition = new FadeTransition();
+            fadeTransition.setCycleCount(2);
+            fadeTransition.setNode(gameButton);
+            fadeTransition.setDuration(Duration.millis(333));
+            fadeTransition.setFromValue(1.0);
+            fadeTransition.setToValue(0.5);
+            fadeTransition.setAutoReverse(true);
+
             gameButton.setOnMouseClicked(mouseEvent -> {
+
+                fadeTransition.play();
+
                 System.out.println("Click!");
             });
 
