@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import ru.kpfu.itis.group11501.influence.client.models.Cell;
+import ru.kpfu.itis.group11501.influence.client.models.GameButton;
 import ru.kpfu.itis.group11501.influence.client.models.GameMap;
 import ru.kpfu.itis.group11501.influence.client.models.Status;
 import ru.kpfu.itis.group11501.influence.client.util.helpers.Loader;
@@ -21,13 +22,13 @@ public class MovesRecipient implements Runnable {
     private Thread thread;
     private GameMap gameMap;
     private Pane gamePane;
-    private Text gameButtonText;
+    private GameButton gameButton;
 
 
 
-    public MovesRecipient(GameMap gameMap, Text gameButtonText, Pane gamePane) {
+    public MovesRecipient(GameMap gameMap, GameButton gameButton, Pane gamePane) {
         this.gameMap = gameMap;
-        this.gameButtonText = gameButtonText;
+        this.gameButton = gameButton;
         this.gamePane = gamePane;
         thread = new Thread(this);
         thread.setDaemon(true);
@@ -60,6 +61,7 @@ public class MovesRecipient implements Runnable {
                             fromCell.setPower(moveBytes[1]);
                             fromCell.deleteSelecting();
                             toCell.deleteSelecting();
+                            gameButton.updatePowersBalance();
                         }
                     });
 
@@ -89,6 +91,7 @@ public class MovesRecipient implements Runnable {
                         @Override
                         public void run() {
                             cell.increasePower();
+                            gameButton.updatePowersBalance();
                         }
                     });
                 }
@@ -101,7 +104,7 @@ public class MovesRecipient implements Runnable {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    gameButtonText.setText("Touch a nearby cell to attack");
+                    gameButton.setText("Touch a cell of your color", "or touch here to end attack");
                 }
             });
         }

@@ -47,8 +47,6 @@ public class GameController implements Initializable {
     private Pane gameFieldPane;
     @FXML
     private Pane gamePane;
-    @FXML
-    private Text gameButtonText;
 
 
     private GameMap gameMap;
@@ -56,6 +54,7 @@ public class GameController implements Initializable {
     private Cell selectedCell;
     private Random random;
     private MovesRecipient movesRecipient;
+    private GameButton gameButton;
 
     /*
     public void notification(ActionEvent actionEvent) {
@@ -163,7 +162,8 @@ public class GameController implements Initializable {
                 if (pointsQuantity > 0) {
                     cell.increasePower();
                     pointsQuantity--;
-                    gameButtonText.setText("Power up your cells (" + pointsQuantity + ")");
+                    gameButton.setText("Power up your cells (" + pointsQuantity + ")", "or touch here to end turn");
+                    gameButton.updatePowersBalance();
 
                     try {
                         Connection.getBufferedOutputStream().write(cell.getNumber());
@@ -175,7 +175,7 @@ public class GameController implements Initializable {
 
                     if (pointsQuantity == 0){
                         gameMap.setStatus(Status.WAITING);
-                        gameButtonText.setText("Wait for you move");
+                        gameButton.setText("Wait for you move");
                     }
                 }
             }
@@ -188,9 +188,9 @@ public class GameController implements Initializable {
                     selectedCell = cell;
 
                     if (cell.getPower() == 1)
-                        gameButtonText.setText("Select a cell with 2+ power");
+                        gameButton.setText("Select a cell with 2+ power", "or touch here to end attack");
                     else
-                        gameButtonText.setText("Touch a nearby cell to attack");
+                        gameButton.setText("Touch a nearby cell to attack", "or touch here to end attack");
                 }
             }
             else {
@@ -200,9 +200,9 @@ public class GameController implements Initializable {
                     cell.selecting();
 
                     if (cell.getPower() == 1)
-                        gameButtonText.setText("Select a cell with 2+ power");
+                        gameButton.setText("Select a cell with 2+ power", "or touch here to end attack");
                     else
-                        gameButtonText.setText("Touch a nearby cell to attack");
+                        gameButton.setText("Touch a nearby cell to attack", "or touch here to end attack");
                 }
 
                 else if (selectedCell.getPower() > 1 && gameMap.isConnected(selectedCell, cell)) {
@@ -245,6 +245,7 @@ public class GameController implements Initializable {
                             }
                         }
                     }
+                    gameButton.updatePowersBalance();
 
                     //sending move
                     Connection.getBufferedOutputStream().write(1);
@@ -275,10 +276,10 @@ public class GameController implements Initializable {
                             selectedCell = toCell;
                             selectedCell.selecting();
                             if (toCell.getPower() == 1)
-                                gameButtonText.setText("Select a cell with 2+ power");
+                                gameButton.setText("Select a cell with 2+ power", "or touch here to end attack");
                         } else {
                             toCell.deleteSelecting();
-                            gameButtonText.setText("Touch a cell of your color");
+                            gameButton.setText("Touch a cell of your color", "or touch here to end attack");
                         }
                     }
                 }
@@ -286,7 +287,7 @@ public class GameController implements Initializable {
         }
     }
 
-    public void changeStatus(MouseEvent mouseEvent) {
+    public void changeStatus() {
 
 
         if (gameMap.getStatus() == Status.CAPTURE){
@@ -296,7 +297,7 @@ public class GameController implements Initializable {
             }
             gameMap.setStatus(Status.POWERS_DISTRIBUTION);
             pointsQuantity = gameMap.getCellsCountByType(gameMap.getOrderNumber());
-            gameButtonText.setText("Power up your cells (" + pointsQuantity + ")");
+            gameButton.setText("Power up your cells (" + pointsQuantity + ")", "or touch here to end turn");
 
             try {
                 Connection.getBufferedOutputStream().write(0);
@@ -316,18 +317,29 @@ public class GameController implements Initializable {
 
         System.out.println("GameController initialized.");
 
+
         try {
             readMap();
             readStaringCells();
+
+            gameButton = new GameButton(gameMap);
+            gamePane.getChildren().add(gameButton.getGameButtonPane());
+            gameButton.getGameButtonPane().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    changeStatus();
+                }
+            });
 
             pointsQuantity = gameMap.getCellsCountByType(gameMap.getOrderNumber());
 
             if (gameMap.getOrderNumber() == 1) {
                 gameMap.setStatus(Status.CAPTURE);
-                gameButtonText.setText("Touch a cell of your color");
+                gameButton.setText("Touch a cell of your color", "or touch here to end attack");
+
             } else {
                 gameMap.setStatus(Status.WAITING);
-                gameButtonText.setText("Wait for you move");
+                gameButton.setText("Wait for you move");
             }
 
         } catch (IOException e) {
@@ -335,7 +347,7 @@ public class GameController implements Initializable {
         }
 
         random = new Random();
-        movesRecipient = new MovesRecipient(gameMap, gameButtonText, gamePane);
+        movesRecipient = new MovesRecipient(gameMap, gameButton, gamePane);
 
 
     }

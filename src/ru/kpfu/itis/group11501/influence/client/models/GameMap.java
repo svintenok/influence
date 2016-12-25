@@ -177,4 +177,13 @@ public class GameMap {
     public int getEnemyOrderNumber() {
         return enemyOrderNumber;
     }
+
+    public int getPowersByType(int type) {
+        int powers = 0;
+        for (Cell cell: cells)
+            if (cell.getType() == type)
+                powers += cell.getPower();
+
+        return powers;
+    }
 }

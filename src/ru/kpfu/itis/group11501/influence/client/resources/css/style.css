@@ -145,3 +145,15 @@
     -fx-alignment: center;
     -fx-text-fill: linear-gradient(cornflowerblue, #0055D6);
 }
+
+#game-button-main-label {
+    -fx-font-family: 'Xenara';
+    -fx-font-size: 22px;
+    -fx-text-fill: whitesmoke;
+}
+
+#game-button-secondary-label {
+    -fx-font-family: 'Xenara';
+    -fx-font-size: 18px;
+    -fx-text-fill: "#303030";
+}

@@ -15,7 +15,6 @@ import ru.kpfu.itis.group11501.influence.client.util.helpers.Loader;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 /**
